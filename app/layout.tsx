@@ -9,7 +9,11 @@ export const metadata = {
     "A high-end, futuristic space-themed portifolio of a Senior Web Engineer",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased selection:bg-neon-blue selection:text-white">
