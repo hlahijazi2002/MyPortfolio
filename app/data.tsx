@@ -33,7 +33,7 @@ export const projects: Project[] = [
   {
     key: 20,
     category: "Next.JS",
-    image: "/Adventure",
+    image: "/Adventure.png",
     title: "Adventure",
     description:
       "A modern, high-performance travel landing page designed to provide a seamless user experience. The project focuses on 'Adventure without limits' featuring smooth interactions and a mobile-first responsive design.",
