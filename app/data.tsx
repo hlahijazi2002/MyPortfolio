@@ -33,12 +33,12 @@ export const projects: Project[] = [
   {
     key: 20,
     category: "Next.JS",
-    image: "/portfolio.png",
-    title: "Portfolio",
+    image: "/adventure",
+    title: "Adventure",
     description:
-      "High-end personal brand website designed to showcase advanced frontend development skills.",
-    siteLink: "#",
-    gitHubLink: "https://github.com/hlahijazi2002/MyPortfolio",
+      "A modern, high-performance travel landing page designed to provide a seamless user experience. The project focuses on 'Adventure without limits' featuring smooth interactions and a mobile-first responsive design.",
+    siteLink: "https://adventure-phi-rouge.vercel.app/",
+    gitHubLink: "https://github.com/hlahijazi2002/Adventure",
   },
   {
     key: 1,
