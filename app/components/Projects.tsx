@@ -9,6 +9,7 @@ interface ProjectCardProps {
   description: string;
   image: string;
   category: string;
+  status?: "in-progress" | "completed";
   siteLink: string;
   gitHubLink: string;
 }
@@ -19,6 +20,7 @@ const ProjectCard = ({
   description,
   image,
   category,
+  status,
   siteLink,
   gitHubLink,
 }: ProjectCardProps) => {
@@ -54,6 +56,19 @@ const ProjectCard = ({
       className="relative group cursor-pointer"
     >
       <div className="relative overflow-hidden rounded-2xl glassmorphism aspect-4/3 border border-white/5 transition-colors group-hover:border-neon-blue/40">
+        {status === "in-progress" && (
+          <div className="absolute top-4 right-4 z-30 px-3 py-1 bg-emerald-500/10 border border-emerald-500/40 rounded-full backdrop-blur-md shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
+                In Development
+              </span>
+            </div>
+          </div>
+        )}
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
           style={{ backgroundImage: `url(${image})` }}

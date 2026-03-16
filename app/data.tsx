@@ -16,10 +16,22 @@ export interface Project {
   image: string;
   title: string;
   description: string;
+  status?: "in-progress" | "completed";
   siteLink: string;
   gitHubLink: string;
 }
 export const projects: Project[] = [
+  {
+    key: 21,
+    category: "Next.JS",
+    image: "/eduCore.png",
+    title: "EduCore University System",
+    description:
+      "A comprehensive Full-Stack academic platform designed to streamline university operations. EduCore bridges the gap between administration, faculty, and students through a unified, secure, and highly responsive interface.",
+    status: "in-progress",
+    siteLink: "https://edu-core-university-system.vercel.app/",
+    gitHubLink: "https://github.com/hlahijazi2002/EduCore-University-System",
+  },
   {
     key: 0,
     category: "React",
