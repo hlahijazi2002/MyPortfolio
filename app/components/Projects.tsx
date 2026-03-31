@@ -6,7 +6,7 @@ import { projects } from "../data";
 interface ProjectCardProps {
   index: number;
   title: string;
-  description: string;
+
   image: string;
   category: string;
   status?: "in-progress" | "completed";
@@ -17,7 +17,7 @@ interface ProjectCardProps {
 const ProjectCard = ({
   index,
   title,
-  description,
+
   image,
   category,
   status,
@@ -82,9 +82,7 @@ const ProjectCard = ({
               {category}
             </span>
             <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
-            <p className="text-slate-300 text-sm mb-6 line-clamp-2">
-              {description}
-            </p>
+
             <div className="flex gap-4">
               <a
                 href={siteLink}

@@ -15,7 +15,6 @@ export interface Project {
   category: string;
   image: string;
   title: string;
-  description: string;
   status?: "in-progress" | "completed";
   siteLink: string;
   gitHubLink: string;
@@ -26,8 +25,6 @@ export const projects: Project[] = [
     category: "Next.JS",
     image: "/eduCore.png",
     title: "EduCore University System",
-    description:
-      "A comprehensive Full-Stack academic platform designed to streamline university operations. EduCore bridges the gap between administration, faculty, and students through a unified, secure, and highly responsive interface.",
     status: "in-progress",
     siteLink: "https://edu-core-university-system.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/EduCore-University-System",
@@ -37,18 +34,22 @@ export const projects: Project[] = [
     category: "React",
     image: "/knot.png",
     title: "Knot Platform",
-    description:
-      "A dynamic social media platform designed to bridge connections through a seamless and interactive user interface. Built with a focus on performance and engagement ",
     siteLink: "https://knot-platform.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Knot-Platform",
+  },
+  {
+    key: 65,
+    category: "Next.JS",
+    image: "/oxa.png",
+    title: "OXA Code",
+    siteLink: "https://oxa-code.vercel.app/",
+    gitHubLink: "https://github.com/hlahijazi2002/OXA-Code",
   },
   {
     key: 20,
     category: "Next.JS",
     image: "/Adventure.png",
     title: "Adventure",
-    description:
-      "A modern, high-performance travel landing page designed to provide a seamless user experience. The project focuses on 'Adventure without limits' featuring smooth interactions and a mobile-first responsive design.",
     siteLink: "https://adventure-phi-rouge.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Adventure",
   },
@@ -57,8 +58,6 @@ export const projects: Project[] = [
     category: "React",
     image: "/Ecommerce.png",
     title: "E-Commerce",
-    description:
-      "Comprehensive and visually appealing E-Commerce interface designed for a high-end shopping experience. It features a clean, user-centric layout with advanced navigation and promotional elements.",
     siteLink: "https://brilliant-melomakarona-81b21b.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/E-Commerce-with-strapi",
   },
@@ -67,8 +66,6 @@ export const projects: Project[] = [
     category: "React",
     image: "/dashboard.png",
     title: "Admin Dashboard",
-    description:
-      "A comprehensive administrative dashboard designed for high-level data visualization and management.",
     siteLink: "https://poetic-stardust-e949f0.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Admin-Dashboard",
   },
@@ -77,8 +74,6 @@ export const projects: Project[] = [
     category: "React",
     image: "/prayerTimes.png",
     title: "Prayer Times",
-    description:
-      "A highly accurate and location-aware web application designed to provide real-time Islamic prayer schedules.",
     siteLink: "https://lively-gelato-cf1aa1.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/PrayersTime",
   },
@@ -87,8 +82,6 @@ export const projects: Project[] = [
     category: "React",
     image: "/toDo.png",
     title: "To Do",
-    description:
-      "A sophisticated task management application designed to streamline daily workflows and enhance productivity.",
     siteLink: "https://tangerine-puffpuff-fee848.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/ToDo-project",
   },
@@ -97,8 +90,6 @@ export const projects: Project[] = [
     category: "React",
     image: "/weather.png",
     title: "Weather",
-    description:
-      "A sleek and highly responsive weather forecasting application that delivers accurate, real-time meteorological data.",
     siteLink: "https://effulgent-druid-fb7446.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Weather-project",
   },
@@ -108,8 +99,6 @@ export const projects: Project[] = [
     category: "HTML & CSS",
     image: "/leon.png",
     title: "Leon",
-    description:
-      "A sleek, minimalist web template designed for creative agencies and freelancers. This project focuses on the 'Less is More' philosophy",
     siteLink: "https://thunderous-phoenix-675bdd.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Leon",
   },
@@ -118,8 +107,6 @@ export const projects: Project[] = [
     category: "HTML & CSS",
     image: "/kasper.png",
     title: "Kasper",
-    description:
-      "A bold and artistic single-page website template designed for creative studios and portfolios. ",
     siteLink: "https://incomparable-mermaid-b93da9.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Kasper",
   },
@@ -128,8 +115,6 @@ export const projects: Project[] = [
     category: "HTML & CSS",
     image: "/dashboardCss.png",
     title: "Dashboard",
-    description:
-      "A main dashboard designed for efficient data organization. The project contributed to the user experience (UX) through a clean and organized interface that facilitates performance and project tracking.",
     siteLink: "https://dulcet-capybara-5dc20b.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Dashboard",
   },
@@ -138,8 +123,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/special.png",
     title: "Special Design",
-    description:
-      "High-performance landing page designed for a creative agency. It features a dark-themed, minimalist UI with a strong focus on user customization and smooth navigation.",
     siteLink: "https://regal-kataifi-505638.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Special-design",
   },
@@ -148,8 +131,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/guessGame.png",
     title: "Guess Game",
-    description:
-      "Interactive web-based puzzle game where players attempt to guess a hidden 5-letter word within five attempts. It features a clean, user-friendly interface with real-time feedback.",
     siteLink: "https://creative-gnome-76a9dc.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Guess-Game",
   },
@@ -158,8 +139,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/hangman.png",
     title: "Hangman Game",
-    description:
-      "Classic web-based word puzzle game where players guess a hidden word letter by letter within a limited number of attempts. It combines logic with a clean, functional interface.",
     siteLink: "https://stellular-naiad-15ae4e.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Hangman-Game",
   },
@@ -168,8 +147,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/memory.png",
     title: "Memory Game",
-    description:
-      "Web-based memory puzzle game designed to test and improve cognitive recognition. Players must flip cards to find matching pairs of animal illustrations in as few attempts as possible.",
     siteLink: "https://aesthetic-maamoul-760165.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Memory-Game",
   },
@@ -178,8 +155,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/quiz.png",
     title: "Quiz App",
-    description:
-      "Dynamic web-based examination tool designed to test technical knowledge through a structured, timed quiz. It features a professional and clean UI built for focused assessment.",
     siteLink: "https://sparkling-speculoos-9bd825.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Quiz-App",
   },
@@ -189,8 +164,6 @@ export const projects: Project[] = [
     category: "JS",
     image: "/typingSpeed.png",
     title: "TypingSpeed Test",
-    description:
-      "Interactive web application designed to measure and improve a user's typing speed and accuracy. It challenges players to type randomly generated words within a strict time limit.",
     siteLink: "https://chipper-florentine-3f254c.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Typing-speed-game",
   },
