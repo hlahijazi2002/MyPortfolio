@@ -57,12 +57,13 @@ const NavBar = () => {
           ))}
         </div>
         <motion.a
-          href="#contact"
+          href="https://drive.google.com/file/d/1tNCMZAFGK5nDWjMoFJ0YFx7Ch1KVMKQB/view?usp=sharing"
+          target="_blank"
           className="bg-neon-blue/10 border border-neon-blue/50 text-neon-blue px-5 py-2 rounded-full text-sm font-semibold hover:bg-neon-blue hover:text-black transition-all shadow-[0_0_15px_rgba(59, 130, 246, 0.3)]"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Hire Me
+          Explore Resume
         </motion.a>
       </div>
     </nav>
