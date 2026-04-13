@@ -79,7 +79,7 @@ const Hero = () => {
                 animate={{ opacity: 1 }}
                 transition={{
                   duration: 0.1,
-                  delay: i * 0.05,
+                  delay: i * 0.09,
                   ease: "easeInOut",
                 }}
               >
@@ -136,8 +136,8 @@ const Hero = () => {
             }}
             className="w-64 h-64 md:w-96 md:h-96 rounded-full relative "
           >
-            <div className="absolute inset-0 bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-40 blur-xl animate-pulse" />
-            <div className="absolute inset-4 bg-cosmic-blue/80 backdrop-blur-xl rounded-full border border-white/10 shadow-[inner_0_0_50px_rgba(255,255,255,0.1)] overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-40 blur-lg animate-pulse" />
+            <div className="absolute inset-4 bg-cosmic-blue/80 backdrop-blur-lg rounded-full border border-white/10 shadow-[inner_0_0_50px_rgba(255,255,255,0.1)] overflow-hidden">
               {orbCircles.map((circle, i) => (
                 <div
                   key={i}

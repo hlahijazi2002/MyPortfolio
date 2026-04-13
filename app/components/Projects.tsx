@@ -6,7 +6,6 @@ import { projects } from "../data";
 interface ProjectCardProps {
   index: number;
   title: string;
-
   image: string;
   category: string;
   status?: "in-progress" | "completed";
@@ -17,7 +16,6 @@ interface ProjectCardProps {
 const ProjectCard = ({
   index,
   title,
-
   image,
   category,
   status,
