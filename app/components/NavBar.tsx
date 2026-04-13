@@ -33,10 +33,10 @@ const NavBar = () => {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold tracking-tighter"
+          className="text-xl font-bold tracking-tighter"
         >
-          <span className="text-white">Hla-</span>
-          <span className="text-neon-blue">Portfolio</span>
+          <span className="text-white">Eng. </span>
+          <span className="text-neon-blue">Hla Hijazi</span>
         </motion.div>
 
         <div className="hidden md:flex gap-8">
@@ -52,7 +52,7 @@ const NavBar = () => {
               {link.icon}
               {link.name}
 
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-neon-blue transition-all duration-300 group-hover:w-full " />
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-neon-blue transition-all duration-300 group-hover:w-full " />
             </motion.a>
           ))}
         </div>

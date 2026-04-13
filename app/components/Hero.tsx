@@ -5,28 +5,34 @@ import Image from "next/image";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x, { stiffness: 100, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 100, damping: 30 });
-  const rotateX = useTransform(mouseXSpring, [-300, 300], [10, -10]);
-  const rotateY = useTransform(mouseYSpring, [-300, 300], [-10, 10]);
+  const rotateX = useTransform(mouseYSpring, [-300, 300], [10, -10]);
+  const rotateY = useTransform(mouseXSpring, [-300, 300], [-10, 10]);
   const [orbCircles, setOrbCircles] = useState<
-    { size: string; top: string; left: string }[]
+    { size: string; top: string; left: string; delay: number }[]
   >([]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      x.set(clientX - innerWidth / 2);
-      y.set(clientY - innerHeight / 2);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [x, y]);
+    const generatedCircles = [...Array(6)].map(() => ({
+      size: Math.random() * 15 + 5 + "px",
+      top: Math.random() * 100 + "%",
+      left: Math.random() * 100 + "%",
+      delay: Math.random() * 2,
+    }));
+    setOrbCircles(generatedCircles);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    x.set(clientX - innerWidth / 2);
+    y.set(clientY - innerHeight / 2);
+  };
 
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
 
@@ -44,13 +50,14 @@ const Hero = () => {
   const handleBtnMouseLeave = () => {
     setBtnPos({ x: 0, y: 0 });
   };
-  const headline = "Crafting Seamless Digital Experiences with Code.";
-  const words = headline.split(" ");
+  const headline = "Engineering the Future of Web Interactivity";
+  const letters = Array.from(headline);
 
   return (
     <section
       ref={containerRef}
       className="min-h-screen flex items-center justify-center pt-24 md:pt-0 overflow-hidden"
+      onMouseMove={handleMouseMove}
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="flex flex-col gap-6 z-10">
@@ -60,24 +67,23 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-neon-blue font-semibold tracking-widest text-sm uppercase flex items-center gap-2 "
             >
-              <span className="w-8 h-[1px] bg-neon-blue" />
+              <span className="w-8 h-px bg-neon-blue" />
               Creative Web Developer
             </motion.div>
           </div>
-          <h1 className="text-3xl md:text-5xl text-green-500 font-bold leading-[1.1] md:leading[1.1] tracking-tight ">
-            {words.map((word, i) => (
+          <h1 className="text-2xl md:text-4xl text-green-500 font-bold leading-[1.2] tracking-tight ">
+            {letters.map((letter, i) => (
               <motion.span
                 key={i}
-                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{
-                  duration: 0.8,
-                  delay: i * 0.1,
-                  ease: [0.2, 0.65, 0.3, 0.9],
+                  duration: 0.1,
+                  delay: i * 0.05,
+                  ease: "easeInOut",
                 }}
-                className="inline-block mr-[0.2em]"
               >
-                {word}
+                {letter}
               </motion.span>
             ))}
           </h1>
@@ -85,22 +91,23 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed"
+            className="text-slate-400 text-sm md:text-lg max-w-xl leading-relaxed"
           >
-            I specialize in building high-performance, interactive web
-            applications using React & Next.js. Turning complex ideas into
-            elegant, user-centric solutions.
+            Specializing in Next.js, TypeScript, and Framer Motion. I focus on
+            delivering lightning-fast, interactive experiences that prioritize
+            both performance and accessibility, From complex backend logic to
+            pixel-perfect UI.
           </motion.p>
           <div className="flex gap-4 mt-4">
             <motion.a
               href="#projects"
-              ref={buttonRef as any}
+              ref={buttonRef}
               onMouseMove={handleBtnMouseMove}
               onMouseLeave={handleBtnMouseLeave}
               animate={{ x: btnPos.x, y: btnPos.y }}
               transition={{ type: "spring", stiffness: 150, damping: 15 }}
               whileTap={{ scale: 0.95 }}
-              className="relative px-8 py-4 bg-neon-blue rounded-full font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-shadow overflow-hidden group"
+              className="relative px-8 py-4 bg-neon-blue rounded-full font-semibold text-white shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-shadow overflow-hidden group"
             >
               <span className="relative z-10">View My Work</span>
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -110,7 +117,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}
-              className="px-8 py-4 border border-white/10 rounded-full font-bold text-white hover:bg-white/5 transition-colors"
+              className="px-8 py-4 border border-white/10 rounded-full font-semibold text-white hover:bg-white/5 transition-colors"
             >
               Let&apos;s Talk
             </motion.a>
@@ -129,17 +136,17 @@ const Hero = () => {
             }}
             className="w-64 h-64 md:w-96 md:h-96 rounded-full relative "
           >
-            <div className="absolute inset-0 bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-40 blur-3xl animate-pulse" />
-            <div className="absolute inset-4 bg-cosmic-blue/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-[inner_0_0_50px_rgba(255,255,255,0.1)] overflow-hidden">
-              {orbCircles.map((_, i) => (
+            <div className="absolute inset-0 bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-40 blur-xl animate-pulse" />
+            <div className="absolute inset-4 bg-cosmic-blue/80 backdrop-blur-xl rounded-full border border-white/10 shadow-[inner_0_0_50px_rgba(255,255,255,0.1)] overflow-hidden">
+              {orbCircles.map((circle, i) => (
                 <div
                   key={i}
                   className="absolute rounded-full bg-white/20 "
                   style={{
-                    width: Math.random() * 20 + 5 + "px",
-                    height: Math.random() * 20 + 5 + "px",
-                    top: Math.random() * 100 + "%",
-                    left: Math.random() * 100 + "%",
+                    width: circle.size,
+                    height: circle.size,
+                    top: circle.top,
+                    left: circle.left,
                   }}
                 ></div>
               ))}
@@ -149,7 +156,8 @@ const Hero = () => {
                 src="/profile.png"
                 alt="Hla Hijazi"
                 fill
-                className="object-contain bg-contain bg-center bg-no-repeat drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]"
+                sizes="(max-width: 768px) 256px, 384px"
+                className="object-contain  bg-no-repeat drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]"
                 priority
               />
             </div>
@@ -164,7 +172,7 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: "linear",
                 }}
-                className="absolute inset-[50px] rounded-full border border-white/5"
+                className="absolute inset-12.5 rounded-full border border-white/5"
               />
             ))}
           </div>
