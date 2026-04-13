@@ -115,15 +115,15 @@ const Projects = () => {
       ? projects
       : projects.filter((p) => p.category === activeTab);
   return (
-    <section className="max-w-7xl mx-auto py-5 relative ">
+    <section className="max-w-7xl mx-auto py-5 relative mt-10">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
         <div>
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="text-3xl md:tex-5xl font-bold mb-4 text-green-500"
+            className="text-3xl md:text-4xl font-bold mb-4 text-white"
           >
-            Featured <span className="text-gradient">Creations</span>
+            Featured <span className="text-green-500">Creations</span>
           </motion.h2>
 
           <motion.h2
@@ -132,7 +132,8 @@ const Projects = () => {
             transition={{ delay: 0.1 }}
             className="text-slate-400 max-w-lg"
           >
-            Acurated selection of my most Lorem ipsum dolor sit.
+            A curated collection of digital experiences, where structural
+            engineering meets modern web development
           </motion.h2>
         </div>
         <div className="flex bg-white/5 p-1 rounded-full border border-white/10 self-sart md:self-auto overflow-x-auto no-scrollbar">
