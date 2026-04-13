@@ -304,3 +304,31 @@ export const contactInfo = [
     value: "Palestine, Gaza",
   },
 ];
+
+export const education = [
+  {
+    degree: "Bachelor of Engineering",
+    institution: "Al-Azhar University",
+    duration: "2019 - 2024",
+    description: "Specializing in Computer Systems Engineering",
+    tech: [
+      "Agile Methodology",
+      "Software Development Life Cycle (SDLC)",
+      "Programming Languages (Java, C, C++, Dart, R, Assembly)",
+      "Data Structures",
+      "Algorithms",
+      "Software Engineering Principles",
+      "Design Patterns",
+      "Database Design",
+      "Software Testing",
+      "Object-Oriented Programming",
+    ],
+  },
+  {
+    degree: "MBA in Artificial Intelligence",
+    institution: "Talal Abu Gazaleh Digital University",
+    duration: "2025 - Present",
+    description: "Specializing in Artificial Intelligence",
+    tech: ["Python", "Machine Learning", "Deep Learning"],
+  },
+];
