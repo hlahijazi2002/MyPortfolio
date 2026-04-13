@@ -61,13 +61,13 @@ const Skills = () => {
   const dublicatedTech = [...techSkills, ...techSkills];
   const dublicatedSkills = [...skills, ...skills];
   return (
-    <section className="max-w-7xl mx-auto relative">
+    <section className="max-w-7xl mx-auto relative py-6">
       <div className="flex flex-row md:flex-col justify-between items-center mb-14 gap-6">
         <div className="max-w-xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            className="text-3xl md:text-4xl font-bold text-white mb-6"
           >
             Technical <span className="text-green-400">Expertise</span>
           </motion.h2>
@@ -78,7 +78,7 @@ const Skills = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-10 relative overflow-hidden">
+      <div className="flex flex-col gap-12 relative overflow-hidden">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 25, repeat: Infinity }}

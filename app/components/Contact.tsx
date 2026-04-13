@@ -1,6 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2, MessageSquare } from "lucide-react";
+import {
+  Send,
+  CheckCircle2,
+  MessageSquare,
+  MessageCircle,
+  Linkedin,
+  Github,
+} from "lucide-react";
 import { useForm } from "@formspree/react";
 import { contactInfo } from "../data";
 
@@ -16,19 +23,20 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl text-green-500 md:text-5xl font-bold mb-6"
+              className="text-3xl text-green-500 md:text-4xl font-bold mb-5"
             >
-              Let&apos;s <span className="text-gradient">Contact</span>
+              Let&apos;s Contact
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-slate-400 text-lg max-w-md"
+              className="text-slate-400 text-md max-w-md"
             >
-              Ready to blast off your next projects? Drop me a message and
-              let&apos;s craft something legandary together.{" "}
+              Let&apos;s bridge the gap between imagination and reality, Whether
+              you have a question or a brilliant project idea, my inbox is
+              always open for innovation.
             </motion.p>
           </div>
           <div className="flex flex-col gap-6">
@@ -185,6 +193,41 @@ const Contact = () => {
               )}
             </motion.button>
           </form>
+          <div className="flex justify-center gap-5 mt-15">
+            {[
+              {
+                icon: <Github size={20} />,
+                href: "https://github.com/hlahijazi2002",
+                label: "GitHub",
+              },
+              {
+                icon: <Linkedin size={20} />,
+                href: "https://www.linkedin.com/in/hla-hijazi-a86a57369/",
+                label: "LinkedIn",
+              },
+              {
+                icon: <MessageCircle size={20} />,
+                href: "https://wa.me/970594814452",
+                label: "WhatsApp",
+              },
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{
+                  y: -5,
+                  backgroundColor: "rgba(59, 130, 246, 0.1)",
+                  borderColor: "rgba(59, 130, 246, 0.5)",
+                }}
+                whileTap={{ scale: 0.9 }}
+                className="w-12 h-12 rounded-2xl glassmorphism flex items-center justify-center text-slate-400 hover:text-neon-blue border border-white/5 transition-all duration-300"
+              >
+                {social.icon}
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
