@@ -37,14 +37,7 @@ export const projects: Project[] = [
     siteLink: "https://knot-platform.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Knot-Platform",
   },
-  {
-    key: 66,
-    category: "Next.JS",
-    image: "/basira.png",
-    title: "BasiraLens",
-    siteLink: "https://basira-sigma.vercel.app/",
-    gitHubLink: "https://github.com/hlahijazi2002/Basira",
-  },
+
   {
     key: 20,
     category: "Next.JS",
@@ -68,6 +61,14 @@ export const projects: Project[] = [
     title: "Admin Dashboard",
     siteLink: "https://poetic-stardust-e949f0.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Admin-Dashboard",
+  },
+  {
+    key: 66,
+    category: "Next.JS",
+    image: "/basira.png",
+    title: "BasiraLens",
+    siteLink: "https://basira-sigma.vercel.app/",
+    gitHubLink: "https://github.com/hlahijazi2002/Basira",
   },
   {
     key: 50,
