@@ -50,7 +50,8 @@ const Hero = () => {
   const handleBtnMouseLeave = () => {
     setBtnPos({ x: 0, y: 0 });
   };
-  const headline = "Engineering the Future of Web Interactivity";
+  const headline =
+    "Engineering Scalable Systems & High-Fidelity Web Experiences";
   const letters = Array.from(headline);
 
   return (
@@ -68,7 +69,7 @@ const Hero = () => {
               className="text-neon-blue font-semibold tracking-widest text-sm uppercase flex items-center gap-2 "
             >
               <span className="w-8 h-px bg-neon-blue" />
-              Creative Web Developer
+              Systems Engineer & Creative Developer
             </motion.div>
           </div>
           <h1 className="text-2xl md:text-4xl text-green-500 font-bold leading-[1.2] tracking-tight ">
@@ -93,10 +94,13 @@ const Hero = () => {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="text-slate-400 text-sm md:text-lg max-w-xl leading-relaxed"
           >
-            Specializing in Next.js, TypeScript, and Framer Motion. I focus on
-            delivering lightning-fast, interactive experiences that prioritize
-            both performance and accessibility, From complex backend logic to
-            pixel-perfect UI.
+            "I specialize in architecting high-performance applications using
+            Next.js and TypeScript, with a core focus on Data Integrity and
+            System Reliability. My engineering background enables me to manage
+            complex Information Systems and large-scale databases with absolute
+            precision. Whether building interactive UIs or managing sensitive
+            Data Environments, I ensure every record is secure, accurate, and
+            optimized for performance
           </motion.p>
           <div className="flex gap-4 mt-4">
             <motion.a

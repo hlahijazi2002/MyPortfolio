@@ -4,7 +4,7 @@ import CustomerCursor from "./components/CustomerCursor";
 import NavBar from "./components/NavBar";
 
 export const metadata = {
-  title: "Hla's Portfolio | Senior Web Developer",
+  title: "Hla Hijazi",
   description:
     "A high-end, futuristic space-themed portifolio of a Senior Web Engineer",
 };

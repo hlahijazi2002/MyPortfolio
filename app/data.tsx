@@ -8,6 +8,10 @@ import {
   Mail,
   Phone,
   MapPin,
+  ShieldCheck,
+  Share2,
+  CheckCircle,
+  Zap,
 } from "lucide-react";
 
 export interface Project {
@@ -181,10 +185,12 @@ export const projects: Project[] = [
 export const skills = [
   { title: "Clean Code", icon: Code2 },
   { title: "Problem Solving", icon: Lightbulb },
+  { title: "Data Integrity", icon: ShieldCheck }, // للتركيز على دقة البيانات وسريتها
+  { title: "System Architecture", icon: Share2 }, // بتبين إنك مهندسة بتبني هياكل أنظمة
+  { title: "Performance Optimization", icon: Zap }, // بدل UI Animation أو كإضافة لقوة السرعة
   { title: "Responsive Design", icon: Layers },
   { title: "Modern CSS", icon: Globe },
-  { title: "UI Animation", icon: Cpu },
-  { title: "Time Saving", icon: Clock },
+  { title: "Quality Assurance", icon: CheckCircle }, // لضمان جودة البيانات والمخرجات
 ];
 export const techSkills = [
   {
