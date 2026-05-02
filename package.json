@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.65",
+    "@ai-sdk/react": "^3.0.170",
     "@formspree/react": "^3.0.0",
+    "@google/generative-ai": "^0.24.1",
+    "ai": "^6.0.170",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",

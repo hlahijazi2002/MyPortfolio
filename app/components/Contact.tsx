@@ -15,8 +15,8 @@ const Contact = () => {
   const [state, handleSubmit] = useForm("xeonadnq");
 
   return (
-    <section className="max-w-7xl mx-auto py-5 relative">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center  ">
+    <section className="max-w-7xl mx-auto py-5 relative mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="flex flex-col gap-10">
           <div>
             <motion.h2

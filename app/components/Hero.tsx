@@ -69,10 +69,10 @@ const Hero = () => {
               className="text-neon-blue font-semibold tracking-widest text-sm uppercase flex items-center gap-2 "
             >
               <span className="w-8 h-px bg-neon-blue" />
-              Systems Engineer & Creative Developer
+              Systems Engineer & Full-Stack Developer
             </motion.div>
           </div>
-          <h1 className="text-2xl md:text-4xl text-green-500 font-bold leading-[1.2] tracking-tight ">
+          <h1 className="text-2xl md:text-3xl text-green-500 font-bold leading-[1.2] tracking-tight ">
             {letters.map((letter, i) => (
               <motion.span
                 key={i}
@@ -94,13 +94,10 @@ const Hero = () => {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="text-slate-400 text-sm md:text-lg max-w-xl leading-relaxed"
           >
-            "I specialize in architecting high-performance applications using
-            Next.js and TypeScript, with a core focus on Data Integrity and
-            System Reliability. My engineering background enables me to manage
-            complex Information Systems and large-scale databases with absolute
-            precision. Whether building interactive UIs or managing sensitive
-            Data Environments, I ensure every record is secure, accurate, and
-            optimized for performance
+            specializing in building scalable web architectures with Next.js and
+            the MERN stack. I bridge the gap between complex system engineering
+            and high-performance web development, with a core focus on data
+            integrity and clean code
           </motion.p>
           <div className="flex gap-4 mt-4">
             <motion.a
@@ -117,7 +114,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.a>
             <motion.a
-              href="#contact"
+              href="/chat"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}

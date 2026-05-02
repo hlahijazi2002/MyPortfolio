@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, JSX } from "react";
-import { Rocket, User, Briefcase, Mail } from "lucide-react";
+import { Cpu, FolderDot, Mail, House, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface NavLink {
@@ -20,10 +20,19 @@ const NavBar = () => {
   }, []);
 
   const navLinks: NavLink[] = [
-    { name: "Home", href: "#home", icon: <Rocket size={18} /> },
-    { name: "Skills", href: "#skills", icon: <User size={18} /> },
-    { name: "Projects", href: "#projects", icon: <Briefcase size={18} /> },
-    { name: "Contact", href: "#contact", icon: <Mail size={18} /> },
+    { name: "Home", href: "/", icon: <House size={18} /> },
+    { name: "Skills", href: "/", icon: <Cpu size={18} /> },
+    {
+      name: "Education",
+      href: "/education",
+      icon: <GraduationCap size={18} />,
+    },
+    {
+      name: "Projects",
+      href: "/projects",
+      icon: <FolderDot size={18} />,
+    },
+    { name: "Contact", href: "/contact", icon: <Mail size={18} /> },
   ];
   return (
     <nav

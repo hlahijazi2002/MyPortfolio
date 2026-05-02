@@ -1,7 +1,8 @@
 import "./globals.css";
-import StarBackground from "./components/StarBackground";
 import CustomerCursor from "./components/CustomerCursor";
-import NavBar from "./components/NavBar";
+import NavbarWrapper from "./components/NavbarWrapper";
+import Chat from "./components/Chat";
+import StarBackground from "./StarBackground";
 
 export const metadata = {
   title: "Hla Hijazi",
@@ -19,8 +20,9 @@ export default function RootLayout({
       <body className="antialiased selection:bg-neon-blue selection:text-white">
         <StarBackground />
         <CustomerCursor />
-        <NavBar />
+        <NavbarWrapper />
         <main className="relative z-10">{children}</main>
+        <Chat />
       </body>
     </html>
   );

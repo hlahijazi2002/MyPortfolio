@@ -115,7 +115,7 @@ const Projects = () => {
       ? projects
       : projects.filter((p) => p.category === activeTab);
   return (
-    <section className="max-w-7xl mx-auto py-5 relative mt-10">
+    <section className="max-w-7xl mx-auto py-5 relative mt-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
         <div>
           <motion.h2

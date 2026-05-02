@@ -28,7 +28,7 @@ const CustomerCursor = () => {
   if (typeof window !== "undefined" && window.innerWidth < 768) return null;
   return (
     <motion.div
-      className="fixed top-0 left-0 w-8 h-8 rounded-full border border-neon-blue pointer-events-none z-[999] flex items-center justify-center mix-blend-difference"
+      className="fixed top-0 left-0 w-8 h-8 rounded-full border border-neon-blue pointer-events-none z-999 flex items-center justify-center mix-blend-difference"
       style={{ translateX: cursorXSpring, translateY: cursorYSpring }}
     >
       <div className="w-1 h-1 bg-neon-blue rounded-full" />

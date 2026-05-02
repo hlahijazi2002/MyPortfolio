@@ -2,8 +2,6 @@ import {
   Code2,
   Layers,
   Lightbulb,
-  Clock,
-  Cpu,
   Globe,
   Mail,
   Phone,
@@ -106,23 +104,6 @@ export const projects: Project[] = [
     siteLink: "https://effulgent-druid-fb7446.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Weather-project",
   },
-
-  // {
-  //   key: 6,
-  //   category: "HTML & CSS",
-  //   image: "/leon.png",
-  //   title: "Leon",
-  //   siteLink: "https://thunderous-phoenix-675bdd.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Leon",
-  // },
-  // {
-  //   key: 7,
-  //   category: "HTML & CSS",
-  //   image: "/kasper.png",
-  //   title: "Kasper",
-  //   siteLink: "https://incomparable-mermaid-b93da9.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Kasper",
-  // },
   {
     key: 8,
     category: "HTML & CSS",
@@ -139,58 +120,17 @@ export const projects: Project[] = [
     siteLink: "https://regal-kataifi-505638.netlify.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Special-design",
   },
-  // {
-  //   key: 10,
-  //   category: "JS",
-  //   image: "/guessGame.png",
-  //   title: "Guess Game",
-  //   siteLink: "https://creative-gnome-76a9dc.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Guess-Game",
-  // },
-  // {
-  //   key: 11,
-  //   category: "JS",
-  //   image: "/hangman.png",
-  //   title: "Hangman Game",
-  //   siteLink: "https://stellular-naiad-15ae4e.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Hangman-Game",
-  // },
-  // {
-  //   key: 12,
-  //   category: "JS",
-  //   image: "/memory.png",
-  //   title: "Memory Game",
-  //   siteLink: "https://aesthetic-maamoul-750150.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Memory-Game",
-  // },
-  // {
-  //   key: 13,
-  //   category: "JS",
-  //   image: "/quiz.png",
-  //   title: "Quiz App",
-  //   siteLink: "https://sparkling-speculoos-9bd825.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Quiz-App",
-  // },
-
-  // {
-  //   key: 15,
-  //   category: "JS",
-  //   image: "/typingSpeed.png",
-  //   title: "TypingSpeed Test",
-  //   siteLink: "https://chipper-florentine-3f254c.netlify.app/",
-  //   gitHubLink: "https://github.com/hlahijazi2002/Typing-speed-game",
-  // },
 ];
 
 export const skills = [
   { title: "Clean Code", icon: Code2 },
   { title: "Problem Solving", icon: Lightbulb },
-  { title: "Data Integrity", icon: ShieldCheck }, // للتركيز على دقة البيانات وسريتها
-  { title: "System Architecture", icon: Share2 }, // بتبين إنك مهندسة بتبني هياكل أنظمة
-  { title: "Performance Optimization", icon: Zap }, // بدل UI Animation أو كإضافة لقوة السرعة
+  { title: "Data Integrity", icon: ShieldCheck },
+  { title: "System Architecture", icon: Share2 },
+  { title: "Performance Optimization", icon: Zap },
   { title: "Responsive Design", icon: Layers },
   { title: "Modern CSS", icon: Globe },
-  { title: "Quality Assurance", icon: CheckCircle }, // لضمان جودة البيانات والمخرجات
+  { title: "Quality Assurance", icon: CheckCircle },
 ];
 export const techSkills = [
   {

@@ -1,4 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-cosmic-black: #020617;
+  --color-cosmic-blue: #0f172a;
+  --color-cosmic-purple: #8b5cf6;
+  --color-neon-violet: #8b5cf6;
+  --color-neon-blue: #3b82f6;
+  --font-sans: "Inter", "5atoshi", "Space Grotesk", sans-serif;
+}
+
 :root {
   --background: #021702;
   --foreground: #f8fafc;
@@ -8,13 +18,26 @@
   --border-glass: rgba(255, 255, 255, 0.1);
 }
 
-@theme {
-  --color-cosmic-black: #020617;
-  --color-cosmic-blue: #0f172a;
-  --color-cosmic-purple: #8b5cf6;
-  --color-neon-violet: #8b5cf6;
-  --color-neon-blue: #3b82f6;
-  --font-sans: "Inter", "5atoshi", "Space Grotesk", sans-serif;
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 transparent;
 }
 
 @keyframes shooting-star {

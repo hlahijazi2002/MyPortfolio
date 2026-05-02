@@ -61,7 +61,7 @@ const EducationCard = ({
 
 const Education = () => {
   return (
-    <section className="max-w-7xl mx-auto mb-10 px-6">
+    <section className="max-w-7xl mx-auto mb-10 px-6 mt-20">
       <div className="mb-16">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
