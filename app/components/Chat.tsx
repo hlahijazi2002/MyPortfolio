@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 
 type Message = {
   role: "user" | "assistant";
@@ -196,7 +197,49 @@ export default function Chat() {
                         : "bg-white text-slate-700 border border-gray-100 rounded-tl-none"
                     }`}
                   >
-                    {m.content}
+                    {m.content.split(/(\s+)/).map((part, index, array) => {
+                      const isExternalLink = /^(https?:\/\/[^\s]+)/g.test(part);
+                      const isInternalLink = part.includes("/projects");
+
+                      if (isExternalLink || isInternalLink) {
+                        const cleanLink = part
+                          .replace(/[()]/g, "")
+                          .replace(/[.,]$/, "");
+
+                        const previousWord =
+                          array[index - 1]?.toLowerCase() || "";
+                        const isCodeLink = previousWord.includes("code");
+
+                        let linkLabel = "Visit Link";
+
+                        if (cleanLink.includes("github.com")) {
+                          linkLabel = isCodeLink ? "View Code" : "GitHub";
+                        } else if (cleanLink.includes("docs.google")) {
+                          linkLabel = "View CV";
+                        } else if (cleanLink.includes("linkedin")) {
+                          linkLabel = "LinkedIn";
+                        } else if (cleanLink.includes("wa.me")) {
+                          linkLabel = "WhatsApp";
+                        } else if (isInternalLink) {
+                          linkLabel = "Explore All Projects";
+                        } else {
+                          linkLabel = "Live Demo";
+                        }
+
+                        return (
+                          <Link
+                            key={index}
+                            href={cleanLink}
+                            target={isInternalLink ? "_self" : "_blank"}
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-blue-400 font-bold underline hover:text-blue-300 transition-colors mx-1 bg-blue-500/5 px-2 py-0.5 rounded-md border border-blue-500/10"
+                          >
+                            {linkLabel} {isInternalLink ? "🚀" : "🔗"}
+                          </Link>
+                        );
+                      }
+                      return part;
+                    })}
                   </div>
                 </div>
               ))}
