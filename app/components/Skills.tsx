@@ -34,11 +34,13 @@ const TechCard = ({
   width,
   height,
   index,
+  alt,
 }: {
   src: string;
   width: number;
   height: number;
   index: number;
+  alt: string;
 }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
@@ -51,7 +53,7 @@ const TechCard = ({
       src={src}
       width={width}
       height={height}
-      alt="skill"
+      alt={alt}
       className="opacity-70 hover:opacity-100 transition-opacity"
     />
   </motion.div>
@@ -62,11 +64,12 @@ const Skills = () => {
   const dublicatedSkills = [...skills, ...skills];
   return (
     <section className="max-w-7xl mx-auto relative py-6">
-      <div className="flex flex-row md:flex-col justify-between items-center mb-14 gap-6">
+      <div className="flex flex-col justify-between items-center mb-14 gap-6">
         <div className="max-w-xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold text-white mb-6"
           >
             Technical <span className="text-green-400">Expertise</span>
@@ -90,6 +93,7 @@ const Skills = () => {
               src={tech.Image}
               width={tech.width}
               height={tech.height}
+              alt={tech.name}
               index={i}
             />
           ))}

@@ -57,7 +57,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen flex items-center justify-center pt-24 md:pt-0 overflow-hidden"
+      className="flex items-center justify-center pt-28 pb-6 md:pt-32 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -101,7 +101,7 @@ const Hero = () => {
           </motion.p>
           <div className="flex gap-4 mt-4">
             <motion.a
-              href="#projects"
+              href="/projects"
               ref={buttonRef}
               onMouseMove={handleBtnMouseMove}
               onMouseLeave={handleBtnMouseLeave}
@@ -114,7 +114,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.a>
             <motion.a
-              href="/chat"
+              href="/#contact"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}

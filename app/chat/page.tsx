@@ -82,12 +82,12 @@ export default function FullChatPage() {
 
   return (
     <div
-      className="flex h-screen font-sans overflow-hidden bg-transparent text-white relative"
+      className="flex h-screen font-sans overflow-hidden bg-transparent relative"
       dir="ltr"
     >
       <Link
         href="/"
-        className="absolute top-6 left-6 z-50 flex items-center gap-2 text-gray-400 hover:text-white transition-all group bg-white/5 backdrop-blur-md p-2 px-3 rounded-xl border border-white/10 shadow-lg"
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-[#ffffff] transition-all group bg-[#ffffff]/80 dark:bg-white/5 backdrop-blur-md p-2 px-3 rounded-xl border border-slate-200 dark:border-white/10 shadow-lg"
       >
         <svg
           width="20"
@@ -106,9 +106,9 @@ export default function FullChatPage() {
         <span className="text-sm font-medium">Home</span>
       </Link>
 
-      <aside className="w-80 border-r border-white/10 hidden md:flex flex-col z-20 bg-white/5 backdrop-blur-md pt-15">
-        <div className="p-6 border-b border-white/10">
-          <h2 className="text-lg font-bold text-blue-400 tracking-tight">
+      <aside className="w-80 border-r border-slate-200 dark:border-white/10 hidden md:flex flex-col z-20 bg-[#ffffff]/70 dark:bg-white/5 backdrop-blur-md pt-15">
+        <div className="p-6 border-b border-slate-200 dark:border-white/10">
+          <h2 className="text-lg font-bold text-blue-600 dark:text-blue-400 tracking-tight">
             Quick Topics
           </h2>
         </div>
@@ -117,7 +117,7 @@ export default function FullChatPage() {
             <button
               key={i}
               onClick={() => handleSend(s)}
-              className="w-full text-left p-4 text-[13px] bg-white/5 border border-white/10 hover:border-blue-500/50 rounded-xl transition-all text-gray-300 shadow-sm active:scale-95 hover:bg-white/10"
+              className="w-full text-left p-4 text-[13px] bg-[#ffffff] dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 rounded-xl transition-all text-[#334155] dark:text-gray-300 shadow-sm active:scale-95 dark:hover:bg-white/10"
             >
               {s}
             </button>
@@ -126,15 +126,15 @@ export default function FullChatPage() {
       </aside>
 
       <main className="flex-1 flex flex-col relative overflow-hidden bg-transparent">
-        <header className="py-3 flex-col justify-center items-center md:pl-14 border-b border-white/10 shrink-0 z-10 bg-white/5 backdrop-blur-lg">
+        <header className="py-3 flex-col justify-center items-center md:pl-14 border-b border-slate-200 dark:border-white/10 shrink-0 z-10 bg-[#ffffff]/70 dark:bg-white/5 backdrop-blur-lg">
           <div className="flex flex-col">
-            <h1 className="font-bold text-gray-100 text-md ">
-              Hla's AI Assistant
+            <h1 className="font-bold text-[#1e293b] dark:text-gray-100 text-md">
+              Hla&apos;s AI Assistant
             </h1>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">
+            <span className="text-[9px] text-slate-500 dark:text-gray-400 font-bold uppercase tracking-widest">
               Active
             </span>
           </div>
@@ -142,14 +142,14 @@ export default function FullChatPage() {
 
         <div
           ref={scrollRef}
-          className="flex-1 overflow-y-auto p-8 space-y-6 w-full max-w-4xl mx-auto custom-scrollbar bg-transparent pt-10"
+          className="flex-1 overflow-y-auto overflow-x-hidden p-8 space-y-6 w-full max-w-4xl mx-auto custom-scrollbar bg-transparent pt-10"
         >
           {messages.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-center opacity-40">
+            <div className="h-full flex flex-col items-center justify-center text-center opacity-60">
               <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-4 text-2xl border border-blue-500/20">
                 🤖
               </div>
-              <p className="text-gray-300 font-medium">
+              <p className="text-[#334155] dark:text-gray-300 font-medium">
                 How can I assist you today?
               </p>
             </div>
@@ -161,10 +161,10 @@ export default function FullChatPage() {
               className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`p-4 rounded-2xl max-w-[85%] text-[14.5px] shadow-xl leading-relaxed ${
+                className={`p-4 rounded-2xl max-w-[85%] text-[14.5px] shadow-xl leading-relaxed break-words ${
                   m.role === "user"
-                    ? "bg-blue-600/90 text-white rounded-tr-none border border-white/10"
-                    : "bg-white/10 backdrop-blur-md border border-white/10 text-gray-100 rounded-tl-none"
+                    ? "bg-blue-600/90 text-[#ffffff] rounded-tr-none border border-white/10"
+                    : "bg-[#ffffff] dark:bg-white/10 backdrop-blur-md border border-slate-200 dark:border-white/10 text-[#334155] dark:text-gray-100 rounded-tl-none"
                 }`}
               >
                 {m.content.split(/(\s+)/).map((part, index, array) => {
@@ -201,7 +201,7 @@ export default function FullChatPage() {
                         href={cleanLink}
                         target={isInternalLink ? "_self" : "_blank"}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-blue-400 font-bold underline hover:text-blue-300 transition-colors mx-1 bg-blue-500/5 px-2 py-0.5 rounded-md border border-blue-500/10"
+                        className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold underline hover:text-blue-700 dark:hover:text-blue-300 transition-colors mx-1 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20"
                       >
                         {linkLabel} {isInternalLink ? "🚀" : "🔗"}
                       </Link>
@@ -214,13 +214,13 @@ export default function FullChatPage() {
           ))}
 
           {isLoading && (
-            <div className="flex items-center gap-2 text-blue-400 text-xs font-medium animate-pulse bg-white/5 px-3 py-1 rounded-full w-fit">
+            <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 text-xs font-medium animate-pulse bg-blue-500/10 px-3 py-1 rounded-full w-fit">
               Typing...
             </div>
           )}
         </div>
 
-        <div className="p-4 md:p-6 bg-transparent backdrop-blur-xl  border-white/10 shrink-0">
+        <div className="p-4 md:p-6 bg-transparent backdrop-blur-xl border-white/10 shrink-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -229,14 +229,14 @@ export default function FullChatPage() {
             className="max-w-4xl mx-auto flex gap-2 md:gap-3 relative"
           >
             <input
-              className="flex-1 bg-white/10 border border-white/20 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-500/50 text-white text-sm"
+              className="flex-1 bg-[#ffffff] dark:bg-white/10 border border-slate-200 dark:border-white/20 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-500/50 text-[#1e293b] dark:text-[#ffffff] text-sm"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Message Hla's Assistant..."
             />
             <button
               disabled={isLoading}
-              className="bg-blue-600 text-white px-5 md:px-8 rounded-xl font-bold hover:bg-blue-700 shadow-lg transition-all active:scale-95 shrink-0"
+              className="bg-blue-600 text-[#ffffff] px-5 md:px-8 rounded-xl font-bold hover:bg-blue-700 shadow-lg transition-all active:scale-95 shrink-0"
             >
               <span className="hidden md:inline">Send</span>
               <span className="md:hidden">➤</span>

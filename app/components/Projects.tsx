@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "../data";
+
 interface ProjectCardProps {
   index: number;
   title: string;
@@ -13,7 +14,7 @@ interface ProjectCardProps {
   gitHubLink: string;
 }
 
-const ProjectCard = ({
+export const ProjectCard = ({
   index,
   title,
   image,
@@ -53,7 +54,7 @@ const ProjectCard = ({
       }}
       className="relative group cursor-pointer"
     >
-      <div className="relative overflow-hidden rounded-2xl glassmorphism aspect-4/3 border border-white/5 transition-colors group-hover:border-neon-blue/40">
+      <div className="relative overflow-hidden rounded-2xl glassmorphism aspect-4/3 border border-white/5 shadow-md transition-colors group-hover:border-neon-blue/40">
         {status === "in-progress" && (
           <div className="absolute top-4 right-4 z-30 px-3 py-1 bg-emerald-500/10 border border-emerald-500/40 rounded-full backdrop-blur-md shadow-[0_0_10px_rgba(16,185,129,0.1)]">
             <div className="flex items-center gap-2">
@@ -71,15 +72,15 @@ const ProjectCard = ({
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
           style={{ backgroundImage: `url(${image})` }}
         >
-          <div className="absolute inset-0 bg-cosmic-black/40 group-hover:bg-cosmic-black/20 transition-colors" />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
         </div>
 
-        <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-cosmic-black via-cosmic-black/60 to-transparent">
-          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ">
+        <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/90 via-black/60 to-transparent">
+          <div className="transform md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
             <span className="text-neon-blue text-xs font-bold uppercase tracking-wider">
               {category}
             </span>
-            <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
+            <h3 className="text-2xl font-bold mb-2 !text-white">{title}</h3>
 
             <div className="flex gap-4">
               <a
@@ -115,49 +116,50 @@ const Projects = () => {
       ? projects
       : projects.filter((p) => p.category === activeTab);
   return (
-    <section className="max-w-7xl mx-auto py-5 relative mt-20">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <section className="relative pt-6">
+      <div className="flex flex-col items-center text-center gap-6 mb-10">
         <div>
           <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-white"
           >
-            Featured <span className="text-green-500">Creations</span>
+            All <span className="text-green-500">Projects</span>
           </motion.h2>
 
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-slate-400 max-w-lg"
+            className="text-slate-400 max-w-lg mx-auto"
           >
             A curated collection of digital experiences, where structural
             engineering meets modern web development
-          </motion.h2>
+          </motion.p>
         </div>
-        <div className="flex bg-white/5 p-1 rounded-full border border-white/10 self-sart md:self-auto overflow-x-auto no-scrollbar">
+        <div className="flex bg-white/5 p-1 rounded-full border border-white/10 self-center overflow-x-auto no-scrollbar">
           {categories.map((category, i) => (
             <button
               key={i}
               onClick={() => setActiveTab(category)}
-              className={`relative px-6 py-2 rounded-full text-sm font-meduim transition-colors whitespace-nowrap ${activeTab === category ? "text-white" : "text-slate-400  hover:text-white"}`}
+              className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${activeTab === category ? "text-white" : "text-slate-400 hover:text-white"}`}
             >
               {activeTab === category && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-neon-blue rounded-full shadow-[0_0_15px_rgba(59, 130, 246, 0.5)]"
+                  className="absolute inset-0 bg-neon-blue rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
-              <span className="relative z-10 ">{category}</span>
+              <span className="relative z-10">{category}</span>
             </button>
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <AnimatePresence>
-          {" "}
           {filteredProjects.map((project, i) => {
             const { key, ...projectProps } = project;
             return <ProjectCard key={key} {...projectProps} index={i} />;

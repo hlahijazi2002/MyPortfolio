@@ -48,7 +48,7 @@ const EducationCard = ({
           {item.tech.map((skill: string, i: number) => (
             <span
               key={i}
-              className="px-3 py-1 text-[11px]  rounded-lg bg-slate-800/50 border border-white/5 text-slate-300 group-hover:border-neon-blue/30 transition-colors"
+              className="px-3 py-1 text-[11px]  rounded-lg bg-slate-100 text-slate-700 dark:bg-slate-800/50 dark:text-slate-300 border border-slate-200 dark:border-white/5 group-hover:border-neon-blue/30 transition-colors"
             >
               {skill}
             </span>
@@ -61,8 +61,8 @@ const EducationCard = ({
 
 const Education = () => {
   return (
-    <section className="max-w-7xl mx-auto mb-10 px-6 mt-20">
-      <div className="mb-16">
+    <section className="max-w-7xl mx-auto px-6">
+      <div className="mb-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}

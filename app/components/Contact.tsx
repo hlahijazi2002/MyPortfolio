@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   Send,
   CheckCircle2,
-  MessageSquare,
+  Download,
   MessageCircle,
   Linkedin,
   Github,
@@ -15,30 +15,31 @@ const Contact = () => {
   const [state, handleSubmit] = useForm("xeonadnq");
 
   return (
-    <section className="max-w-7xl mx-auto py-5 relative mt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="max-w-7xl mx-auto py-5 relative">
+      <div className="text-center mb-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl text-green-500 md:text-4xl font-bold mb-5"
+        >
+          Let&apos;s Contact
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-slate-400 text-md max-w-md mx-auto"
+        >
+          Let&apos;s bridge the gap between imagination and reality. Whether you
+          have a question or a brilliant project idea, my inbox is always open
+          for innovation.
+        </motion.p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div className="flex flex-col gap-10">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl text-green-500 md:text-4xl font-bold mb-5"
-            >
-              Let&apos;s Contact
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-slate-400 text-md max-w-md"
-            >
-              Let&apos;s bridge the gap between imagination and reality, Whether
-              you have a question or a brilliant project idea, my inbox is
-              always open for innovation.
-            </motion.p>
-          </div>
           <div className="flex flex-col gap-6">
             {contactInfo.map((info, i) => (
               <motion.div
@@ -47,7 +48,7 @@ const Contact = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 + i * 0.1 }}
-                className="flex items-center gap-6"
+                className="group flex items-center gap-6"
               >
                 <div className="w-12 h-12 rounded-xl glassmorphism flex items-center justify-center group-hover:bg-white/10 transition-colors">
                   {info.icon}
@@ -63,33 +64,71 @@ const Contact = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full h-48 rounded-3xl overflow-hidden relative glassmorphism border border-white/5"
+            className="w-full rounded-3xl glassmorphism border border-white/5 p-6 flex flex-col gap-4"
           >
-            <div className="absolute inset-0 bg-linear-to-tr from-neon-blue/20 to-neon-violet/20" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <MessageSquare
-                size={64}
-                className="text-white/10 animate-pulse"
-              />
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+              </span>
+              <h3 className="text-white font-bold">Available for work</h3>
             </div>
-            {[Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-                transition={{
-                  duration: 3 + i,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute w-4 h-4 rounded-full bg-white/10 "
-                style={{ top: 20 + i * 15 + "%", left: 10 + i * 20 + "%" }}
-              />
-            ))}
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Open to full-time roles, freelance projects, and collaborations.
+              Usually replies within 24 hours.
+            </p>
+            <a
+              href="https://docs.google.com/document/d/1c2qDqvsiPYWwoJap_tFQmo7vPB2au0ADKcmCAu_cW28/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-neon-blue/10 border border-neon-blue/50 text-neon-blue text-sm font-semibold hover:bg-neon-blue hover:text-black transition-all"
+            >
+              <Download size={16} />
+              View Resume
+            </a>
           </motion.div>
+
+          <div className="flex justify-center gap-5">
+            {[
+              {
+                icon: <Github size={20} />,
+                href: "https://github.com/hlahijazi2002",
+                label: "GitHub",
+              },
+              {
+                icon: <Linkedin size={20} />,
+                href: "https://www.linkedin.com/in/hla-hijazi-a86a57369/",
+                label: "LinkedIn",
+              },
+              {
+                icon: <MessageCircle size={20} />,
+                href: "https://wa.me/970594814452",
+                label: "WhatsApp",
+              },
+            ].map((social) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                whileHover={{
+                  y: -5,
+                  backgroundColor: "rgba(59, 130, 246, 0.1)",
+                  borderColor: "rgba(59, 130, 246, 0.5)",
+                }}
+                whileTap={{ scale: 0.9 }}
+                className="w-12 h-12 rounded-2xl glassmorphism flex items-center justify-center text-slate-400 hover:text-neon-blue border border-white/5 transition-all duration-300"
+              >
+                {social.icon}
+              </motion.a>
+            ))}
+          </div>
         </div>
+
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -173,10 +212,11 @@ const Contact = () => {
             </motion.div>
 
             <motion.button
+              type="submit"
               disabled={state.submitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`mt-2 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(59, 130,246,0.2)] ${state.succeeded ? "bg-green-500 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]" : "bg-neon-blue text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"}`}
+              className={`mt-2 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(59,130,246,0.2)] ${state.succeeded ? "bg-green-500 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]" : "bg-neon-blue text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"}`}
             >
               {state.succeeded ? (
                 <>
@@ -193,41 +233,6 @@ const Contact = () => {
               )}
             </motion.button>
           </form>
-          <div className="flex justify-center gap-5 mt-15">
-            {[
-              {
-                icon: <Github size={20} />,
-                href: "https://github.com/hlahijazi2002",
-                label: "GitHub",
-              },
-              {
-                icon: <Linkedin size={20} />,
-                href: "https://www.linkedin.com/in/hla-hijazi-a86a57369/",
-                label: "LinkedIn",
-              },
-              {
-                icon: <MessageCircle size={20} />,
-                href: "https://wa.me/970594814452",
-                label: "WhatsApp",
-              },
-            ].map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{
-                  y: -5,
-                  backgroundColor: "rgba(59, 130, 246, 0.1)",
-                  borderColor: "rgba(59, 130, 246, 0.5)",
-                }}
-                whileTap={{ scale: 0.9 }}
-                className="w-12 h-12 rounded-2xl glassmorphism flex items-center justify-center text-slate-400 hover:text-neon-blue border border-white/5 transition-all duration-300"
-              >
-                {social.icon}
-              </motion.a>
-            ))}
-          </div>
         </motion.div>
       </div>
     </section>

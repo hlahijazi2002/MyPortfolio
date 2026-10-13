@@ -2,8 +2,10 @@ import Projects from "@/app/components/Projects";
 
 const ProjectsPage = () => {
   return (
-    <section id="skills" className="px-6">
-      <Projects />
+    <section id="projects" className="px-6 pt-28 pb-20">
+      <div className="max-w-7xl mx-auto">
+        <Projects />
+      </div>
     </section>
   );
 };

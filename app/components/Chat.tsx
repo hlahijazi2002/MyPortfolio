@@ -106,7 +106,7 @@ export default function Chat() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="mb-4 bg-white text-blue-600 px-4 py-2 rounded-xl shadow-xl text-[12px] font-bold border border-blue-50"
+            className="mb-4 bg-[#ffffff] text-blue-600 px-4 py-2 rounded-xl shadow-xl text-[12px] font-bold border border-blue-50"
           >
             👋 Ask my AI about me!
           </motion.div>
@@ -119,12 +119,12 @@ export default function Chat() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="mb-4 w-80 h-112.5 bg-white border border-gray-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex flex-col overflow-hidden"
+            className="mb-4 w-80 h-112.5 bg-[#ffffff] border border-gray-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex flex-col overflow-hidden"
           >
-            <div className="p-4 bg-white border-b border-gray-50 flex justify-between items-center">
+            <div className="p-4 bg-[#ffffff] border-b border-gray-50 flex justify-between items-center">
               <div className="flex flex-col">
-                <span className="text-sm font-bold text-slate-800">
-                  Hla's AI Assistant
+                <span className="text-sm font-bold text-[#1e293b]">
+                  Hla&apos;s AI Assistant
                 </span>
                 <span className="text-[9px] text-green-500 font-bold uppercase tracking-wider">
                   Online
@@ -178,11 +178,11 @@ export default function Chat() {
 
             <div
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#FAFAFA] custom-scrollbar"
+              className="flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-4 bg-[#FAFAFA] custom-scrollbar"
             >
               {messages.length === 0 && (
                 <p className="text-[11px] text-gray-400 text-center mt-10">
-                  Hi! Ask me anything about Hla's skills or experience.
+                  Hi! Ask me anything about Hla&apos;s skills or experience.
                 </p>
               )}
               {messages.map((m, i) => (
@@ -191,10 +191,10 @@ export default function Chat() {
                   className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`p-3 rounded-2xl text-[13px] max-w-[85%] leading-relaxed shadow-sm ${
+                    className={`p-3 rounded-2xl text-[13px] max-w-[85%] leading-relaxed shadow-sm break-words ${
                       m.role === "user"
-                        ? "bg-blue-600 text-white rounded-tr-none"
-                        : "bg-white text-slate-700 border border-gray-100 rounded-tl-none"
+                        ? "bg-blue-600 text-[#ffffff] rounded-tr-none"
+                        : "bg-[#ffffff] text-[#334155] border border-gray-100 rounded-tl-none"
                     }`}
                   >
                     {m.content.split(/(\s+)/).map((part, index, array) => {
@@ -232,7 +232,7 @@ export default function Chat() {
                             href={cleanLink}
                             target={isInternalLink ? "_self" : "_blank"}
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-blue-400 font-bold underline hover:text-blue-300 transition-colors mx-1 bg-blue-500/5 px-2 py-0.5 rounded-md border border-blue-500/10"
+                            className="inline-flex items-center gap-1 text-blue-600 font-bold underline hover:text-blue-700 transition-colors mx-1 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20"
                           >
                             {linkLabel} {isInternalLink ? "🚀" : "🔗"}
                           </Link>
@@ -252,10 +252,10 @@ export default function Chat() {
 
             <form
               onSubmit={onSubmit}
-              className="p-3 bg-white border-t border-gray-50 flex gap-2"
+              className="p-3 bg-[#ffffff] border-t border-gray-50 flex gap-2"
             >
               <input
-                className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-[13px] text-slate-800 outline-none focus:border-blue-300 transition-all"
+                className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-[13px] text-[#1e293b] outline-none focus:border-blue-300 transition-all"
                 value={input}
                 placeholder="Type a message..."
                 onChange={(e) => setInput(e.target.value)}
@@ -263,7 +263,7 @@ export default function Chat() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center hover:bg-blue-700 shadow-md disabled:bg-gray-200"
+                className="bg-blue-600 text-[#ffffff] w-10 h-10 rounded-xl flex items-center justify-center hover:bg-blue-700 shadow-md disabled:bg-gray-200"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -290,7 +290,7 @@ export default function Chat() {
           setIsOpen(!isOpen);
           setShowTooltip(false);
         }}
-        className="w-16 h-16 bg-blue-600 rounded-full shadow-[0_10px_30px_rgba(37,99,235,0.4)] flex items-center justify-center text-2xl hover:scale-105 active:scale-95 transition-all text-white"
+        className="w-16 h-16 bg-blue-600 rounded-full shadow-[0_10px_30px_rgba(37,99,235,0.4)] flex items-center justify-center text-2xl hover:scale-105 active:scale-95 transition-all text-[#ffffff]"
       >
         {isOpen ? (
           <svg
