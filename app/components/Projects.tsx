@@ -72,22 +72,22 @@ export const ProjectCard = ({
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
           style={{ backgroundImage: `url(${image})` }}
         >
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+          <div className="absolute inset-0 bg-[#000000]/10 group-hover:bg-[#000000]/20 transition-colors" />
         </div>
 
-        <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/90 via-black/60 to-transparent">
+        <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-[#000000]/90 via-[#000000]/60 to-transparent">
           <div className="transform md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
-            <span className="text-neon-blue text-xs font-bold uppercase tracking-wider">
+            <span className="text-[#60a5fa] text-xs font-bold uppercase tracking-wider">
               {category}
             </span>
-            <h3 className="text-2xl font-bold mb-2 !text-white">{title}</h3>
+            <h3 className="text-2xl font-bold mb-2 text-[#ffffff]">{title}</h3>
 
             <div className="flex gap-4">
               <a
                 href={siteLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-white/10 hover:bg-neon-blue rounded-full transition-colors text-white"
+                className="p-2 bg-[#ffffff]/15 hover:bg-neon-blue rounded-full transition-colors text-[#ffffff]"
               >
                 <ExternalLink size={18} />
               </a>
@@ -95,7 +95,7 @@ export const ProjectCard = ({
                 href={gitHubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-white/10 hover:bg-neon-blue rounded-full transition-colors text-white"
+                className="p-2 bg-[#ffffff]/15 hover:bg-neon-blue rounded-full transition-colors text-[#ffffff]"
               >
                 <Github size={18} />
               </a>
@@ -144,7 +144,7 @@ const Projects = () => {
             <button
               key={i}
               onClick={() => setActiveTab(category)}
-              className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${activeTab === category ? "text-white" : "text-slate-400 hover:text-white"}`}
+              className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${activeTab === category ? "text-[#ffffff]" : "text-slate-400 hover:text-cosmic-blue dark:hover:text-[#ffffff]"}`}
             >
               {activeTab === category && (
                 <motion.div

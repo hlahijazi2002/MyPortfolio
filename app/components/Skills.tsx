@@ -54,7 +54,7 @@ const TechCard = ({
       width={width}
       height={height}
       alt={alt}
-      className="opacity-70 hover:opacity-100 transition-opacity"
+      className="opacity-83 hover:opacity-100 transition-opacity"
     />
   </motion.div>
 );
