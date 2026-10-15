@@ -1,5 +1,7 @@
 "use client";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Zap, Layers, Code2 } from "lucide-react";
 import { projects } from "../data";
@@ -16,9 +18,36 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
+const typed = (text: string, start: number) =>
+  Array.from(text).map((ch, i) => (
+    <motion.span
+      key={i}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.1, delay: (start + i) * 0.07 }}
+    >
+      {ch}
+    </motion.span>
+  ));
 const Hero = () => {
   const bgProjects = projects.slice(0, 9);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
 
+  const handleBtnMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (buttonRef.current) {
+      const { clientX, clientY } = e;
+      const { left, top, width, height } =
+        buttonRef.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+      setBtnPos({ x: (clientX - centerX) * 0.4, y: (clientY - centerY) * 0.4 });
+    }
+  };
+
+  const handleBtnMouseLeave = () => {
+    setBtnPos({ x: 0, y: 0 });
+  };
   return (
     <section className="relative overflow-hidden pt-28 pb-10 md:pt-32">
       {/* Background: tilted project screenshots */}
@@ -34,29 +63,26 @@ const Hero = () => {
         </div>
         <div className="absolute inset-0 bg-linear-to-r from-(--background) via-(--background)/85 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-(--background) to-transparent" />
-        <div className="absolute -top-24 right-1/4 w-96 h-96 bg-neon-blue/20 blur-[120px] rounded-full" />
+        <div className="absolute -top-24 right-1/4 w-96 h-96 bg-green-500/15 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-14 items-center">
         <div className="flex flex-col gap-6">
           <motion.div
             {...fadeUp(0)}
-            className="flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-neon-blue"
+            className="flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-green-600 dark:text-green-400"
           >
-            <span className="w-2 h-2 rounded-full bg-neon-blue" />
+            <span className="w-2 h-2 rounded-full bg-green-500" />
             Engineer • Developer • Builder
           </motion.div>
 
-          <motion.h1
-            {...fadeUp(0.1)}
-            className="text-3xl sm:text-4xl xl:text-5xl font-extrabold leading-[1.15] tracking-tight text-white"
-          >
-            I build scalable{" "}
-            <span className="bg-linear-to-r from-neon-blue to-neon-violet bg-clip-text text-transparent">
-              web products
-            </span>{" "}
-            people love to use.
-          </motion.h1>
+          <h1 className="text-3xl sm:text-4xl xl:text-5xl font-extrabold leading-[1.15] tracking-tight text-white">
+            {typed("I build scalable ", 0)}
+            <span className="text-green-600 dark:text-green-400">
+              {typed("web products", 17)}
+            </span>
+            {typed(" people love to use.", 29)}
+          </h1>
 
           <motion.p
             {...fadeUp(0.2)}
@@ -67,22 +93,26 @@ const Hero = () => {
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-4 mt-2">
-            <a
+            <motion.a
               href="/#projects"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-neon-blue rounded-full font-semibold text-[#ffffff] shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transition-shadow"
+              ref={buttonRef}
+              onMouseMove={handleBtnMouseMove}
+              onMouseLeave={handleBtnMouseLeave}
+              animate={{ x: btnPos.x, y: btnPos.y }}
+              transition={{ type: "spring", stiffness: 150, damping: 15 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative inline-flex items-center gap-2 px-8 py-4 bg-neon-blue rounded-full font-semibold text-[#ffffff] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-shadow overflow-hidden group"
             >
-              View My Work
-              <ArrowUpRight
-                size={18}
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </a>
-            <a
+              <span className="relative z-10">View My Work</span>
+              <ArrowUpRight size={18} className="relative z-10" />
+              <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.a>
+            <Link
               href="/#contact"
               className="px-7 py-3.5 rounded-full font-semibold text-white glassmorphism border border-white/20 hover:border-neon-blue/50 transition-colors"
             >
               Let&apos;s Talk
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -111,8 +141,7 @@ const Hero = () => {
           className="flex flex-col items-center gap-5"
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80">
-            <div className="absolute -inset-2 rounded-full bg-linear-to-br from-neon-blue/50 to-neon-violet/50 blur-xl" />
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-neon-blue/40">
+            <div className="relative w-full h-full rounded-full overflow-hidden">
               <Image
                 src="/profile.png"
                 alt="Hla Hijazi"
@@ -150,7 +179,7 @@ const Hero = () => {
 
           <div className="text-center">
             <p className="text-2xl font-extrabold text-white">Hla Hijazi</p>
-            <p className="text-xs tracking-[0.2em] uppercase text-neon-blue mt-1">
+            <p className="text-xs tracking-[0.2em] uppercase text-green-600 dark:text-green-400 mt-1">
               Systems Engineering • Full-Stack
             </p>
           </div>

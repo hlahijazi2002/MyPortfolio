@@ -4,9 +4,11 @@ import { Sun, Moon, Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const navLinks = [
   { name: "Home", href: "/#home" },
+  { name: "About", href: "/#about" },
   { name: "Skills", href: "/#skills" },
   { name: "Projects", href: "/projects" },
   { name: "Education", href: "/#education" },
@@ -41,7 +43,7 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    const ids = ["home", "skills", "projects", "education", "contact"];
+    const ids = ["home", "about", "skills", "projects", "education", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -64,10 +66,14 @@ const NavBar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "py-4 glassmorphism" : "py-6 bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="text-xl font-bold tracking-tighter">
-          {/* <span className="text-white">Eng. </span> */}
-          <span className="text-white">Hla Hijazi</span>
-        </div>
+        <Link href="/#home" className="leading-tight">
+          <p className="text-lg md:text-xl font-bold tracking-tight text-white">
+            Hla Hijazi
+          </p>
+          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-400">
+            Software Engineer
+          </p>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -83,42 +89,44 @@ const NavBar = () => {
               {link.name}
             </a>
           ))}
-          <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            aria-label="Toggle theme"
-            className="w-9 h-9 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-slate-300 hover:text-neon-blue hover:border-neon-blue/50 transition-all"
-          >
-            {mounted && (isDark ? <Sun size={16} /> : <Moon size={16} />)}
-          </button>
         </div>
 
         <div className="flex md:hidden items-center gap-3">
           <button
             onClick={() => setTheme(isDark ? "light" : "dark")}
             aria-label="Toggle theme"
-            className="w-9 h-9 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-slate-300"
+            className="w-9 h-9 flex items-center justify-center text-slate-300"
           >
             {mounted && (isDark ? <Sun size={16} /> : <Moon size={16} />)}
           </button>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
-            className="w-9 h-9 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-slate-300"
+            className="w-9 h-9 flex items-center justify-center text-slate-300"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
-        <motion.a
-          href="https://docs.google.com/document/d/1c2qDqvsiPYWwoJap_tFQmo7vPB2au0ADKcmCAu_cW28/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-block bg-neon-blue/10 border border-neon-blue/50 text-neon-blue px-5 py-2 rounded-full text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Explore Resume
-        </motion.a>
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            aria-label="Toggle theme"
+            className="w-9 h-9 flex items-center justify-center text-slate-300 hover:text-neon-blue transition-colors"
+          >
+            {mounted && (isDark ? <Sun size={16} /> : <Moon size={16} />)}
+          </button>
+          <motion.a
+            href="https://docs.google.com/document/d/1c2qDqvsiPYWwoJap_tFQmo7vPB2au0ADKcmCAu_cW28/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-neon-blue/10 border border-neon-blue/50 text-neon-blue px-5 py-2 rounded-full text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Explore Resume
+          </motion.a>
+        </div>
       </div>
       <AnimatePresence>
         {menuOpen && (

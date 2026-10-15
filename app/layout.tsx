@@ -5,6 +5,7 @@ import Chat from "./components/Chat";
 import StarBackground from "./StarBackground";
 import ThemeProvider from "./components/ThemeProvider";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 export const metadata = {
   title: "Hla Hijazi",
@@ -33,6 +34,7 @@ export default function RootLayout({
           <NavbarWrapper />
           <main className="relative z-10">{children}</main>
           <Chat />
+          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>
