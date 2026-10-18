@@ -36,6 +36,7 @@ export const projects: Project[] = [
     category: "React",
     image: "/knot.png",
     title: "Knot Platform",
+    status: "in-progress",
     siteLink: "https://knot-platform.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Knot-Platform",
   },
@@ -196,6 +197,7 @@ export const techSkills = [
     width: 50,
     height: 50,
   },
+  { Image: "/imagekit.png", width: 50, height: 50, name: "ImageKit" },
   {
     name: "SASS",
     Image: "/sass.svg",
