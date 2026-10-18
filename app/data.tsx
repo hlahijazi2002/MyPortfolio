@@ -169,12 +169,14 @@ export const techSkills = [
     width: 50,
     height: 50,
   },
+  { Image: "/inngest.jpg", width: 50, height: 50, name: "Inngest" },
   {
     name: "Redux",
     Image: "/redux.png",
     width: 50,
     height: 50,
   },
+  { Image: "/clerk.png", width: 50, height: 50, name: "Clerk" },
   {
     name: "React Query",
     Image: "/reactquery.png",

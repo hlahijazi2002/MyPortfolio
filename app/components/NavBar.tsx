@@ -80,13 +80,19 @@ const NavBar = () => {
             <a
               key={link.name}
               href={link.href}
-              className={`transition-colors text-sm font-medium ${
-                isActive(link.href)
-                  ? "text-neon-blue"
-                  : "text-slate-300 hover:text-white"
+              className={`group text-sm font-medium ${
+                isActive(link.href) ? "text-neon-blue" : "text-slate-300"
               }`}
             >
-              {link.name}
+              {Array.from(link.name).map((ch, i) => (
+                <span
+                  key={i}
+                  className="inline-block transition-colors duration-500 group-hover:text-neon-blue group-hover:[transition-delay:var(--d)]"
+                  style={{ "--d": `${i * 70}ms` } as React.CSSProperties}
+                >
+                  {ch}
+                </span>
+              ))}
             </a>
           ))}
         </div>
