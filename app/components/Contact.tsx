@@ -41,26 +41,58 @@ const Contact = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
-            {contactInfo.map((info, i) => (
-              <motion.div
-                key={info.label}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                className="group flex items-center gap-6"
-              >
-                <div className="w-12 h-12 rounded-xl glassmorphism flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                  {info.icon}
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500 uppercase font-bold tracking-widest">
-                    {info.label}
-                  </p>
-                  <p className="text-white font-medium ">{info.value}</p>
-                </div>
-              </motion.div>
-            ))}
+            {contactInfo.map((info, i) => {
+              const label = info.label.toLowerCase();
+              const href = label.includes("email")
+                ? `mailto:${info.value}`
+                : label.includes("phone")
+                  ? `https://wa.me/${info.value.replace(/\D/g, "").replace(/^00/, "")}`
+                  : null;
+
+              const content = (
+                <>
+                  <div className="w-12 h-12 rounded-xl glassmorphism flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                    {info.icon}
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase font-bold tracking-widest">
+                      {info.label}
+                    </p>
+                    <p
+                      className={`text-white font-medium transition-colors ${
+                        href ? "group-hover:text-neon-blue" : ""
+                      }`}
+                    >
+                      {info.value}
+                    </p>
+                  </div>
+                </>
+              );
+
+              return (
+                <motion.div
+                  key={info.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  className="group"
+                >
+                  {href ? (
+                    <a
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-6"
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-6">{content}</div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
@@ -83,7 +115,7 @@ const Contact = () => {
             <a
               href="/Hla-Hijazi-CV.pdf"
               download="Hla-Hijazi-CV.pdf"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-neon-blue/10 border border-neon-blue/50 text-neon-blue text-sm font-semibold hover:bg-neon-blue hover:text-black transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-neon-blue/10 border border-neon-blue/50 text-neon-blue text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
             >
               <Download size={16} />
               Download CV
@@ -215,7 +247,7 @@ const Contact = () => {
               disabled={state.submitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`mt-2 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(59,130,246,0.2)] ${state.succeeded ? "bg-green-500 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]" : "bg-neon-blue text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"}`}
+              className={`mt-2 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(59,130,246,0.2)] ${state.succeeded ? "bg-green-500 text-[#ffffff] shadow-[0_0_20px_rgba(34,197,94,0.4)]" : "bg-neon-blue text-[#ffffff] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"}`}
             >
               {state.succeeded ? (
                 <>

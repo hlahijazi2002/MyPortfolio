@@ -3,14 +3,8 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Zap, Layers, Code2 } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data";
-
-const highlights = [
-  { icon: Zap, title: "Idea to Launch", sub: "End-to-end development" },
-  { icon: Layers, title: "Full-Stack", sub: "Next.js · Node · SQL" },
-  { icon: Code2, title: "Real Projects", sub: "Built for real clients" },
-];
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -29,6 +23,7 @@ const typed = (text: string, start: number) =>
       {ch}
     </motion.span>
   ));
+
 const Hero = () => {
   const bgProjects = projects.slice(0, 9);
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -48,8 +43,9 @@ const Hero = () => {
   const handleBtnMouseLeave = () => {
     setBtnPos({ x: 0, y: 0 });
   };
+
   return (
-    <section className="relative overflow-hidden pt-28 pb-10 md:pt-32">
+    <section className="relative overflow-hidden pt-24 pb-6 md:pt-32 md:pb-10">
       {/* Background: tilted project screenshots */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div className="absolute -right-20 -top-10 w-[110%] md:w-[75%] grid grid-cols-3 gap-4 -rotate-6 scale-110 opacity-30">
@@ -66,11 +62,11 @@ const Hero = () => {
         <div className="absolute -top-24 right-1/4 w-96 h-96 bg-green-500/15 blur-[120px] rounded-full" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-14 items-center">
-        <div className="flex flex-col gap-6">
+      <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-6 lg:gap-14 items-center">
+        <div className="flex flex-col gap-5 md:gap-6">
           <motion.div
             {...fadeUp(0)}
-            className="flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-green-600 dark:text-green-400"
+            className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-green-600 dark:text-green-400"
           >
             <span className="w-2 h-2 rounded-full bg-green-500" />
             Engineer • Developer • Builder
@@ -85,14 +81,17 @@ const Hero = () => {
           </h1>
 
           <motion.p
-            {...fadeUp(0.2)}
+            {...fadeUp(3.6)}
             className="text-slate-400 text-sm md:text-base max-w-md leading-relaxed"
           >
             Full-Stack Developer working with Next.js and the MERN stack. Clean
             code, reliable systems, fast interfaces.
           </motion.p>
 
-          <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-4 mt-2">
+          <motion.div
+            {...fadeUp(3.9)}
+            className="flex flex-wrap gap-3 sm:gap-4 mt-1"
+          >
             <motion.a
               href="/#projects"
               ref={buttonRef}
@@ -101,7 +100,7 @@ const Hero = () => {
               animate={{ x: btnPos.x, y: btnPos.y }}
               transition={{ type: "spring", stiffness: 150, damping: 15 }}
               whileTap={{ scale: 0.95 }}
-              className="relative inline-flex items-center gap-2 px-8 py-4 bg-neon-blue rounded-full font-semibold text-[#ffffff] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-shadow overflow-hidden group"
+              className="relative inline-flex items-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 bg-neon-blue rounded-full font-semibold text-[#ffffff] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-shadow overflow-hidden group"
             >
               <span className="relative z-10">View My Work</span>
               <ArrowUpRight size={18} className="relative z-10" />
@@ -114,23 +113,6 @@ const Hero = () => {
               Let&apos;s Talk
             </Link>
           </motion.div>
-
-          <motion.div
-            {...fadeUp(0.4)}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-2xl glassmorphism border border-white/10 overflow-hidden mt-4"
-          >
-            {highlights.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex items-center gap-3 p-4">
-                <div className="w-10 h-10 shrink-0 rounded-xl bg-neon-blue/10 text-neon-blue flex items-center justify-center">
-                  <Icon size={18} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-white">{title}</p>
-                  <p className="text-xs text-slate-500">{sub}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
         </div>
 
         {/* Photo + name */}
@@ -138,16 +120,16 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col items-center gap-5"
+          className="order-first lg:order-last flex flex-col items-center gap-4"
         >
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
+          <div className="relative w-44 h-44 sm:w-60 sm:h-60 lg:w-[26rem] lg:h-[26rem]">
             <div className="relative w-full h-full rounded-full overflow-hidden">
               <Image
                 src="/profile.png"
                 alt="Hla Hijazi"
                 fill
                 priority
-                sizes="(max-width: 768px) 256px, 320px"
+                sizes="(max-width: 1024px) 240px, 416px"
                 className="object-cover object-top"
               />
             </div>
@@ -155,7 +137,7 @@ const Hero = () => {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-4 sm:-left-12 top-8 px-4 py-3 rounded-2xl glassmorphism border border-white/10 shadow-xl"
+              className="hidden sm:block absolute -left-4 sm:-left-12 top-8 px-4 py-3 rounded-2xl glassmorphism border border-white/10 shadow-xl"
             >
               <p className="text-[10px] uppercase tracking-wider text-slate-500">
                 Main stack
@@ -168,7 +150,7 @@ const Hero = () => {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-4 sm:-right-10 bottom-8 px-4 py-3 rounded-2xl glassmorphism border border-white/10 shadow-xl"
+              className="hidden sm:block absolute -right-4 sm:-right-10 bottom-8 px-4 py-3 rounded-2xl glassmorphism border border-white/10 shadow-xl"
             >
               <p className="text-[10px] uppercase tracking-wider text-slate-500">
                 Based in
@@ -177,7 +159,7 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          <div className="text-center">
+          <div className="hidden lg:block text-center">
             <p className="text-2xl font-extrabold text-white">Hla Hijazi</p>
             <p className="text-xs tracking-[0.2em] uppercase text-green-600 dark:text-green-400 mt-1">
               Systems Engineering • Full-Stack
