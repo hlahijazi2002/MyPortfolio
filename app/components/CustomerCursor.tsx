@@ -52,13 +52,13 @@ const CustomerCursor = () => {
       {/* Ring (follows with a soft delay) */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999]"
+        className="pointer-events-none fixed left-0 top-0 z-9999"
         style={{ x: ringX, y: ringY, opacity: visible ? 1 : 0 }}
       >
         <motion.div
           animate={{ scale: pressed ? 0.8 : hovering ? 1.9 : 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className={`-ml-[18px] -mt-[18px] h-9 w-9 rounded-full border-2 border-neon-blue transition-colors duration-200 ${
+          className={`-ml-4.5 -mt-4.5 h-9 w-9 rounded-full border-2 border-neon-blue transition-colors duration-200 ${
             hovering ? "bg-neon-blue/10" : "bg-transparent"
           }`}
         />
@@ -67,10 +67,10 @@ const CustomerCursor = () => {
       {/* Dot (exact position) */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999]"
+        className="pointer-events-none fixed left-0 top-0 z-9999"
         style={{ x, y, opacity: visible ? 1 : 0 }}
       >
-        <div className="-ml-[3px] -mt-[3px] h-1.5 w-1.5 rounded-full bg-neon-blue" />
+        <div className="-ml-0.75 -mt-0.75 h-1.5 w-1.5 rounded-full bg-neon-blue" />
       </motion.div>
     </>
   );

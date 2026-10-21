@@ -92,3 +92,9 @@ html.dark {
   --background: #020617;
   --foreground: #f8fafc;
 }
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}

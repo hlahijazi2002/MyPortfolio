@@ -13,6 +13,11 @@ export const metadata = {
     "A high-end, futuristic space-themed portifolio of a Senior Web Engineer",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",

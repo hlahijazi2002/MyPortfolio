@@ -33,9 +33,9 @@ const EducationCard = ({
   useEffect(() => {
     const check = () => {
       if (outerRef.current && measureRef.current) {
-        setOverflow(
-          measureRef.current.scrollWidth > outerRef.current.clientWidth,
-        );
+        const next =
+          measureRef.current.scrollWidth > outerRef.current.clientWidth;
+        setOverflow((prev) => (prev === next ? prev : next));
       }
     };
     check();
@@ -64,11 +64,12 @@ const EducationCard = ({
         delay: index * 0.15,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="group relative h-full"
+      // min-w-0: lets the grid column shrink instead of growing with the marquee
+      className="group relative h-full min-w-0"
     >
       <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-neon-blue/40 via-transparent to-green-500/40 opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="glassmorphism relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 p-7 transition-transform duration-500 group-hover:-translate-y-1">
+      <div className="glassmorphism relative flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-white/10 p-7 transition-transform duration-500 group-hover:-translate-y-1">
         <GraduationCap
           size={120}
           strokeWidth={1}
@@ -110,9 +111,13 @@ const EducationCard = ({
           {item.description}
         </p>
 
+        {/*
+          w-full + min-w-0 + contain:inline-size => this box's width never depends
+          on its content, which breaks the measure -> resize -> measure loop.
+        */}
         <div
           ref={outerRef}
-          className="relative mt-auto overflow-hidden border-t border-white/10 pt-5"
+          className="relative mt-auto w-full min-w-0 overflow-hidden border-t border-white/10 pt-5 [contain:inline-size]"
           style={maskStyle}
         >
           {/* hidden row used only to measure the real width of the tags */}
@@ -126,31 +131,32 @@ const EducationCard = ({
             ))}
           </div>
 
-          {overflow ? (
-            <motion.div
-              animate={{
-                x: ["-25%", "0%"],
-              }}
-              transition={{
-                ease: "linear",
-                duration: Math.max(15, item.tech.length * 4),
-                repeat: Infinity,
-              }}
-              className="flex w-max"
-            >
-              {[...item.tech, ...item.tech, ...item.tech, ...item.tech].map(
-                (skill, i) => (
+          {/* fixed height: same card height in both states (no layout jump) */}
+          <div className="flex h-8 items-center overflow-hidden">
+            {overflow ? (
+              <motion.div
+                animate={{ x: ["-25%", "0%"] }}
+                transition={{
+                  ease: "linear",
+                  duration: Math.max(15, item.tech.length * 4),
+                  repeat: Infinity,
+                }}
+                className="flex w-max"
+              >
+                {[...item.tech, ...item.tech, ...item.tech, ...item.tech].map(
+                  (skill, i) => (
+                    <Tag key={i} text={skill} />
+                  ),
+                )}
+              </motion.div>
+            ) : (
+              <div className="flex w-max">
+                {item.tech.map((skill, i) => (
                   <Tag key={i} text={skill} />
-                ),
-              )}
-            </motion.div>
-          ) : (
-            <div className="flex flex-wrap gap-y-2">
-              {item.tech.map((skill, i) => (
-                <Tag key={i} text={skill} />
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -175,7 +181,8 @@ const Education = () => {
         </p>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      {/* grid-cols-1: explicit single column on mobile, items can't push it wider */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {education.map((item, index) => (
           <EducationCard key={index} item={item} index={index} />
         ))}
