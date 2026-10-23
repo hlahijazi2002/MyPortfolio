@@ -3,13 +3,42 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { useLang } from "../i18n/LanguageProvider";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
 };
 
+const text = {
+  tooltip: {
+    en: "👋 Ask my AI about me!",
+    ar: "👋 اسأل مساعدي الذكي عني!",
+  },
+  title: { en: "Hla's AI Assistant", ar: "المساعد الذكي لهلا" },
+  online: { en: "Online", ar: "متصل" },
+  expand: { en: "Expand to Full Screen", ar: "عرض بالشاشة الكاملة" },
+  empty: {
+    en: "Hi! Ask me anything about Hla's skills or experience.",
+    ar: "أهلاً! اسألني أي شي عن مهارات هلا أو خبرتها.",
+  },
+  typing: { en: "Typing...", ar: "عم بكتب..." },
+  placeholder: { en: "Type a message...", ar: "اكتب رسالة..." },
+};
+
+const linkLabels = {
+  viewCode: { en: "View Code", ar: "عرض الكود" },
+  github: { en: "GitHub", ar: "GitHub" },
+  cv: { en: "View CV", ar: "عرض السيرة الذاتية" },
+  linkedin: { en: "LinkedIn", ar: "LinkedIn" },
+  whatsapp: { en: "WhatsApp", ar: "واتساب" },
+  allProjects: { en: "Explore All Projects", ar: "استكشف كل المشاريع" },
+  demo: { en: "Live Demo", ar: "عرض مباشر" },
+};
+
 export default function Chat() {
+  const { t, lang, dir } = useLang();
+  const isAr = lang === "ar";
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -76,7 +105,8 @@ export default function Chat() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        // بنبعت اللغة الحالية عشان الـ API يرد فيها
+        body: JSON.stringify({ messages: updatedMessages, lang }),
       });
 
       const data = await response.json();
@@ -96,6 +126,7 @@ export default function Chat() {
   if (pathname === "/chat") return null;
 
   return (
+    // الحاوية الخارجية ثابتة LTR وعلى اليمين دايماً (عشان زر الواتساب على اليسار دايماً)
     <div
       className="fixed bottom-6 right-6 z-999 flex flex-col items-end font-sans"
       dir="ltr"
@@ -103,12 +134,13 @@ export default function Chat() {
       <AnimatePresence>
         {showTooltip && !isOpen && (
           <motion.div
+            dir={dir}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             className="mb-4 bg-[#ffffff] text-blue-600 px-4 py-2 rounded-xl shadow-xl text-[12px] font-bold border border-blue-50"
           >
-            👋 Ask my AI about me!
+            {t(text.tooltip)}
           </motion.div>
         )}
       </AnimatePresence>
@@ -116,6 +148,7 @@ export default function Chat() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            dir={dir}
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -124,10 +157,14 @@ export default function Chat() {
             <div className="p-4 bg-[#ffffff] border-b border-gray-50 flex justify-between items-center">
               <div className="flex flex-col">
                 <span className="text-sm font-bold text-[#1e293b]">
-                  Hla&apos;s AI Assistant
+                  {t(text.title)}
                 </span>
-                <span className="text-[9px] text-green-500 font-bold uppercase tracking-wider">
-                  Online
+                <span
+                  className={`text-[9px] text-green-500 font-bold ${
+                    isAr ? "text-[10px]" : "uppercase tracking-wider"
+                  }`}
+                >
+                  {t(text.online)}
                 </span>
               </div>
 
@@ -138,7 +175,7 @@ export default function Chat() {
                     setIsOpen(false);
                   }}
                   className="text-gray-400 hover:text-blue-600 transition-colors"
-                  title="Expand to Full Screen"
+                  title={t(text.expand)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -182,15 +219,19 @@ export default function Chat() {
             >
               {messages.length === 0 && (
                 <p className="text-[11px] text-gray-400 text-center mt-10">
-                  Hi! Ask me anything about Hla&apos;s skills or experience.
+                  {t(text.empty)}
                 </p>
               )}
               {messages.map((m, i) => (
+                // الصف LTR: رسالة المستخدم دايماً يمين ورسالة المساعد يسار.
+                // اتجاه النص جوا الفقاعة حسب اللغة.
                 <div
                   key={i}
+                  dir="ltr"
                   className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
+                    dir={dir}
                     className={`p-3 rounded-2xl text-[13px] max-w-[85%] leading-relaxed shadow-sm break-words ${
                       m.role === "user"
                         ? "bg-blue-600 text-[#ffffff] rounded-tr-none"
@@ -198,32 +239,34 @@ export default function Chat() {
                     }`}
                   >
                     {m.content.split(/(\s+)/).map((part, index, array) => {
-                      const isExternalLink = /^(https?:\/\/[^\s]+)/g.test(part);
+                      const isExternalLink = /^(https?:\/\/[^\s]+)/.test(part);
                       const isInternalLink = part.includes("/projects");
 
                       if (isExternalLink || isInternalLink) {
                         const cleanLink = part
                           .replace(/[()]/g, "")
-                          .replace(/[.,]$/, "");
+                          .replace(/[.,،]$/, "");
 
                         const previousWord =
                           array[index - 1]?.toLowerCase() || "";
-                        const isCodeLink = previousWord.includes("code");
+                        const isCodeLink =
+                          previousWord.includes("code") ||
+                          previousWord.includes("كود");
 
-                        let linkLabel = "Visit Link";
+                        let label = linkLabels.demo;
 
                         if (cleanLink.includes("github.com")) {
-                          linkLabel = isCodeLink ? "View Code" : "GitHub";
+                          label = isCodeLink
+                            ? linkLabels.viewCode
+                            : linkLabels.github;
                         } else if (cleanLink.includes("docs.google")) {
-                          linkLabel = "View CV";
+                          label = linkLabels.cv;
                         } else if (cleanLink.includes("linkedin")) {
-                          linkLabel = "LinkedIn";
+                          label = linkLabels.linkedin;
                         } else if (cleanLink.includes("wa.me")) {
-                          linkLabel = "WhatsApp";
+                          label = linkLabels.whatsapp;
                         } else if (isInternalLink) {
-                          linkLabel = "Explore All Projects";
-                        } else {
-                          linkLabel = "Live Demo";
+                          label = linkLabels.allProjects;
                         }
 
                         return (
@@ -234,7 +277,7 @@ export default function Chat() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-blue-600 font-bold underline hover:text-blue-700 transition-colors mx-1 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20"
                           >
-                            {linkLabel} {isInternalLink ? "🚀" : "🔗"}
+                            {t(label)} {isInternalLink ? "🚀" : "🔗"}
                           </Link>
                         );
                       }
@@ -245,7 +288,7 @@ export default function Chat() {
               ))}
               {isLoading && (
                 <div className="text-blue-500 text-[10px] animate-pulse font-medium">
-                  Typing...
+                  {t(text.typing)}
                 </div>
               )}
             </div>
@@ -257,7 +300,7 @@ export default function Chat() {
               <input
                 className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-[13px] text-[#1e293b] outline-none focus:border-blue-300 transition-all"
                 value={input}
-                placeholder="Type a message..."
+                placeholder={t(text.placeholder)}
                 onChange={(e) => setInput(e.target.value)}
               />
               <button
@@ -275,6 +318,7 @@ export default function Chat() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className={isAr ? "-scale-x-100" : ""}
                 >
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <path d="m22 2-7 20-4-9-9-4Z" />

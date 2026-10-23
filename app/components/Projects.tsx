@@ -3,16 +3,39 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "../data";
+import { useLang, type L10n } from "../i18n/LanguageProvider";
 
 interface ProjectCardProps {
   index: number;
-  title: string;
+  title: L10n;
   image: string;
   category: string;
   status?: "in-progress" | "completed";
   siteLink: string;
   gitHubLink: string;
 }
+
+const text = {
+  heading: {
+    en: { parts: ["All", "Projects"], hl: 1 },
+    ar: { parts: ["كل", "المشاريع"], hl: 1 },
+  },
+  subtitle: {
+    en: "A curated collection of digital experiences, where structural engineering meets modern web development",
+    ar: "مجموعة مختارة من التجارب الرقمية، حيث تلتقي الهندسة بتطوير الويب الحديث.",
+  },
+  inDevelopment: { en: "In Development", ar: "قيد التطوير" },
+  all: { en: "All", ar: "الكل" },
+};
+
+// value = القيمة المستخدمة بالفلترة (لازم تطابق category بالداتا)
+const categories: { value: string; label: L10n }[] = [
+  { value: "All", label: text.all },
+  { value: "Next.JS", label: { en: "Next.JS", ar: "Next.JS" } },
+  { value: "React", label: { en: "React", ar: "React" } },
+  { value: "JS", label: { en: "JS", ar: "JS" } },
+  { value: "HTML & CSS", label: { en: "HTML & CSS", ar: "HTML & CSS" } },
+];
 
 export const ProjectCard = ({
   index,
@@ -23,6 +46,8 @@ export const ProjectCard = ({
   siteLink,
   gitHubLink,
 }: ProjectCardProps) => {
+  const { t, lang } = useLang();
+  const isAr = lang === "ar";
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -56,14 +81,19 @@ export const ProjectCard = ({
     >
       <div className="relative overflow-hidden rounded-2xl glassmorphism aspect-4/3 border border-white/5 shadow-md transition-colors group-hover:border-neon-blue/40">
         {status === "in-progress" && (
-          <div className="absolute top-4 right-4 z-30 px-3 py-1 bg-emerald-500/10 border border-emerald-500/40 rounded-full backdrop-blur-md shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+          // end-4 بدل right-4 عشان يروح للزاوية الصح بالعربي
+          <div className="absolute top-4 end-4 z-30 px-3 py-1 bg-emerald-500/10 border border-emerald-500/40 rounded-full backdrop-blur-md shadow-[0_0_10px_rgba(16,185,129,0.1)]">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
-                In Development
+              <span
+                className={`text-[10px] font-bold text-emerald-400 ${
+                  isAr ? "text-xs" : "uppercase tracking-wider"
+                }`}
+              >
+                {t(text.inDevelopment)}
               </span>
             </div>
           </div>
@@ -77,10 +107,16 @@ export const ProjectCard = ({
 
         <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-[#000000]/90 via-[#000000]/60 to-transparent">
           <div className="transform md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
-            <span className="text-[#60a5fa] text-xs font-bold uppercase tracking-wider">
+            {/* الفئة اسم تقنية بالإنجليزي، فبتضل uppercase وبتنعرض LTR */}
+            <span
+              dir="ltr"
+              className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-wider"
+            >
               {category}
             </span>
-            <h3 className="text-2xl font-bold mb-2 text-[#ffffff]">{title}</h3>
+            <h3 className="text-2xl font-bold mb-2 text-[#ffffff]">
+              {t(title)}
+            </h3>
 
             <div className="flex gap-4">
               <a
@@ -108,13 +144,16 @@ export const ProjectCard = ({
 };
 
 const Projects = () => {
+  const { t } = useLang();
   const [activeTab, setActiveTab] = useState("All");
-  const categories = ["All", "Next.JS", "React", "JS", "HTML & CSS"];
 
   const filteredProjects =
     activeTab === "All"
       ? projects
       : projects.filter((p) => p.category === activeTab);
+
+  const heading = t(text.heading);
+
   return (
     <section className="relative pt-6">
       <div className="flex flex-col items-center text-center gap-6 mb-10">
@@ -125,7 +164,16 @@ const Projects = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-white"
           >
-            All <span className="text-green-500">Projects</span>
+            {heading.parts.map((word, i) => (
+              <span key={i}>
+                {i === heading.hl ? (
+                  <span className="text-green-500">{word}</span>
+                ) : (
+                  word
+                )}
+                {i < heading.parts.length - 1 && " "}
+              </span>
+            ))}
           </motion.h2>
 
           <motion.p
@@ -135,25 +183,24 @@ const Projects = () => {
             transition={{ delay: 0.1 }}
             className="text-slate-400 max-w-lg mx-auto"
           >
-            A curated collection of digital experiences, where structural
-            engineering meets modern web development
+            {t(text.subtitle)}
           </motion.p>
         </div>
         <div className="flex bg-white/5 p-1 rounded-full border border-white/10 self-center overflow-x-auto no-scrollbar">
-          {categories.map((category, i) => (
+          {categories.map((category) => (
             <button
-              key={i}
-              onClick={() => setActiveTab(category)}
-              className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${activeTab === category ? "text-[#ffffff]" : "text-slate-400 hover:text-cosmic-blue dark:hover:text-[#ffffff]"}`}
+              key={category.value}
+              onClick={() => setActiveTab(category.value)}
+              className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${activeTab === category.value ? "text-[#ffffff]" : "text-slate-400 hover:text-cosmic-blue dark:hover:text-[#ffffff]"}`}
             >
-              {activeTab === category && (
+              {activeTab === category.value && (
                 <motion.div
                   layoutId="activeTab"
                   className="absolute inset-0 bg-neon-blue rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
-              <span className="relative z-10">{category}</span>
+              <span className="relative z-10">{t(category.label)}</span>
             </button>
           ))}
         </div>

@@ -2,18 +2,22 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
-import { education } from "../data";
+import { education, type EducationData } from "../data";
+import { useLang } from "../i18n/LanguageProvider";
 
-interface EducationItem {
-  degree: string;
-  institution: string;
-  duration: string;
-  description: string;
-  tech: string[];
-}
+const text = {
+  title: { en: "Education", ar: "التعليم" },
+  subtitle: {
+    en: "The academic path behind how I build and think.",
+    ar: "المسار الأكاديمي وراء طريقتي في البناء والتفكير.",
+  },
+  inProgress: { en: "In progress", ar: "قيد الدراسة" },
+  completed: { en: "Completed", ar: "مكتمل" },
+};
 
 const Tag = ({ text }: { text: string }) => (
-  <span className="mr-2 whitespace-nowrap rounded-full border border-neon-blue/20 bg-neon-blue/10 px-3 py-1 text-[11px] font-medium text-neon-blue">
+  // me-2 بدل mr-2 عشان يشتغل صح بالعربي
+  <span className="me-2 whitespace-nowrap rounded-full border border-neon-blue/20 bg-neon-blue/10 px-3 py-1 text-[11px] font-medium text-neon-blue">
     {text}
   </span>
 );
@@ -22,10 +26,11 @@ const EducationCard = ({
   item,
   index,
 }: {
-  item: EducationItem;
+  item: EducationData;
   index: number;
 }) => {
-  const isPresent = /present/i.test(item.duration);
+  const { t, lang } = useLang();
+  const isPresent = !!item.inProgress;
   const outerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState(false);
@@ -43,7 +48,8 @@ const EducationCard = ({
     const ro = new ResizeObserver(check);
     if (outerRef.current) ro.observe(outerRef.current);
     return () => ro.disconnect();
-  }, [item.tech]);
+    // بنعيد القياس لما تتغير اللغة (الخط وعرض النص بيتغيروا)
+  }, [item.tech, lang]);
 
   const maskStyle = overflow
     ? {
@@ -70,15 +76,16 @@ const EducationCard = ({
       <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-neon-blue/40 via-transparent to-green-500/40 opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="glassmorphism relative flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-white/10 p-7 transition-transform duration-500 group-hover:-translate-y-1">
+        {/* -end-4 بدل -right-4 عشان تروح للزاوية الصح بالعربي */}
         <GraduationCap
           size={120}
           strokeWidth={1}
-          className="pointer-events-none absolute -right-4 -top-4 text-neon-blue/10"
+          className="pointer-events-none absolute -end-4 -top-4 text-neon-blue/10"
         />
 
         <div className="relative mb-6 flex flex-wrap items-center gap-3">
           <span className="rounded-full border border-neon-blue/20 bg-neon-blue/10 px-3 py-1 font-mono text-xs text-neon-blue">
-            {item.duration}
+            {t(item.duration)}
           </span>
           <span
             className={`flex items-center gap-2 text-xs font-semibold ${
@@ -97,26 +104,28 @@ const EducationCard = ({
                 }`}
               />
             </span>
-            {isPresent ? "In progress" : "Completed"}
+            {t(isPresent ? text.inProgress : text.completed)}
           </span>
         </div>
 
         <h3 className="relative mb-2 text-2xl font-bold leading-tight text-white">
-          {item.degree}
+          {t(item.degree)}
         </h3>
         <p className="relative mb-4 font-semibold text-green-700 dark:text-green-400">
-          {item.institution}
+          {t(item.institution)}
         </p>
         <p className="relative mb-6 text-sm leading-relaxed text-slate-400">
-          {item.description}
+          {t(item.description)}
         </p>
 
         {/*
           w-full + min-w-0 + contain:inline-size => this box's width never depends
           on its content, which breaks the measure -> resize -> measure loop.
+          dir="ltr": صف التاغات والـ marquee بيتصرفوا نفس الشي بالعربي والإنجليزي.
         */}
         <div
           ref={outerRef}
+          dir="ltr"
           className="relative mt-auto w-full min-w-0 overflow-hidden border-t border-white/10 pt-5 [contain:inline-size]"
           style={maskStyle}
         >
@@ -164,6 +173,7 @@ const EducationCard = ({
 };
 
 const Education = () => {
+  const { t } = useLang();
   return (
     <section className="mx-auto max-w-7xl px-6">
       <div className="mb-12 text-center">
@@ -174,11 +184,9 @@ const Education = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-3 text-3xl font-bold text-white md:text-4xl"
         >
-          <span className="text-green-500">Education</span>
+          <span className="text-green-500">{t(text.title)}</span>
         </motion.h2>
-        <p className="mx-auto max-w-md text-slate-400">
-          The academic path behind how I build and think.
-        </p>
+        <p className="mx-auto max-w-md text-slate-400">{t(text.subtitle)}</p>
       </div>
 
       {/* grid-cols-1: explicit single column on mobile, items can't push it wider */}

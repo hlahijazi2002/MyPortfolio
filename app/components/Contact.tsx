@@ -10,9 +10,43 @@ import {
 } from "lucide-react";
 import { useForm } from "@formspree/react";
 import { contactInfo } from "../data";
+import { useLang } from "../i18n/LanguageProvider";
+
+const text = {
+  title: { en: "Let's Contact", ar: "لنتواصل" },
+  subtitle: {
+    en: "Let's bridge the gap between imagination and reality. Whether you have a question or a brilliant project idea, my inbox is always open for innovation.",
+    ar: "سواء عندك سؤال أو فكرة مشروع مميزة، بريدي مفتوح دائماً لأي فكرة جديدة.",
+  },
+  available: { en: "Available for work", ar: "متاحة للعمل" },
+  availableDesc: {
+    en: "Open to full-time roles, freelance projects, and collaborations. Usually replies within 24 hours.",
+    ar: "منفتحة على الوظائف بدوام كامل، والمشاريع الحرة، والتعاون. عادةً بردّ خلال 24 ساعة.",
+  },
+  downloadCv: { en: "Download CV", ar: "تحميل السيرة الذاتية" },
+  name: { en: "Your Name", ar: "اسمك" },
+  namePh: { en: "Hla Hijazi", ar: "هلا حجازي" },
+  email: { en: "Your Email", ar: "بريدك الإلكتروني" },
+  subject: { en: "Subject", ar: "الموضوع" },
+  subjectPh: { en: "Project Inquiry", ar: "استفسار عن مشروع" },
+  message: { en: "Message", ar: "الرسالة" },
+  messagePh: {
+    en: "Tell me about your vision...",
+    ar: "احكيلي عن فكرتك...",
+  },
+  sent: { en: "Message Sent!", ar: "تم إرسال الرسالة!" },
+  send: { en: "Transmit Message", ar: "إرسال الرسالة" },
+};
+
+const inputClass =
+  "bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("xeonadnq");
+  const { t, lang, dir } = useLang();
+  const isAr = lang === "ar";
+  // اتجاه دخول العناصر بالأنيميشن بينعكس بالعربي
+  const slide = dir === "rtl" ? 1 : -1;
 
   return (
     <section className="max-w-7xl mx-auto py-5 relative">
@@ -23,7 +57,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-3xl text-green-500 md:text-4xl font-bold mb-5"
         >
-          Let&apos;s Contact
+          {t(text.title)}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -32,9 +66,7 @@ const Contact = () => {
           transition={{ delay: 0.1 }}
           className="text-slate-400 text-md max-w-md mx-auto"
         >
-          Let&apos;s bridge the gap between imagination and reality. Whether you
-          have a question or a brilliant project idea, my inbox is always open
-          for innovation.
+          {t(text.subtitle)}
         </motion.p>
       </div>
 
@@ -42,12 +74,18 @@ const Contact = () => {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             {contactInfo.map((info, i) => {
-              const label = info.label.toLowerCase();
-              const href = label.includes("email")
-                ? `mailto:${info.value}`
-                : label.includes("phone")
-                  ? `https://wa.me/${info.value.replace(/\D/g, "").replace(/^00/, "")}`
+              // نعتمد على النسخة الإنجليزية للتعرف على نوع الحقل
+              const type = info.label.en.toLowerCase();
+              const rawValue = info.value.en;
+              const href = type.includes("email")
+                ? `mailto:${rawValue}`
+                : type.includes("phone")
+                  ? `https://wa.me/${rawValue.replace(/\D/g, "").replace(/^00/, "")}`
                   : null;
+
+              // الإيميل والهاتف لازم يضلوا LTR حتى بالعربي
+              const isLtrValue =
+                type.includes("email") || type.includes("phone");
 
               const content = (
                 <>
@@ -55,15 +93,20 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 uppercase font-bold tracking-widest">
-                      {info.label}
-                    </p>
                     <p
-                      className={`text-white font-medium transition-colors ${
-                        href ? "group-hover:text-neon-blue" : ""
+                      className={`text-xs text-slate-500 font-bold ${
+                        isAr ? "text-sm" : "uppercase tracking-widest"
                       }`}
                     >
-                      {info.value}
+                      {t(info.label)}
+                    </p>
+                    <p
+                      dir={isLtrValue ? "ltr" : undefined}
+                      className={`text-white font-medium transition-colors ${
+                        isLtrValue && isAr ? "text-end" : ""
+                      } ${href ? "group-hover:text-neon-blue" : ""}`}
+                    >
+                      {t(info.value)}
                     </p>
                   </div>
                 </>
@@ -71,8 +114,8 @@ const Contact = () => {
 
               return (
                 <motion.div
-                  key={info.label}
-                  initial={{ opacity: 0, x: -20 }}
+                  key={info.label.en}
+                  initial={{ opacity: 0, x: 20 * slide }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + i * 0.1 }}
@@ -106,11 +149,10 @@ const Contact = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
               </span>
-              <h3 className="text-white font-bold">Available for work</h3>
+              <h3 className="text-white font-bold">{t(text.available)}</h3>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Open to full-time roles, freelance projects, and collaborations.
-              Usually replies within 24 hours.
+              {t(text.availableDesc)}
             </p>
             <a
               href="/Hla-Hijazi-CV.pdf"
@@ -118,7 +160,7 @@ const Contact = () => {
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-neon-blue/10 border border-neon-blue/50 text-neon-blue text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
             >
               <Download size={16} />
-              Download CV
+              {t(text.downloadCv)}
             </a>
           </motion.div>
 
@@ -161,12 +203,12 @@ const Contact = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: -20 * slide }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           className="glassmorphism p-8 md:p-12 rounded-4xl border-white/5 relative overflow-hidden"
         >
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-neon-blue/10 blur-[80px] rounded-full" />
+          <div className="absolute -top-24 -end-24 w-48 h-48 bg-neon-blue/10 blur-[80px] rounded-full" />
 
           <form
             onSubmit={handleSubmit}
@@ -178,15 +220,15 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="flex flex-col gap-2"
               >
-                <label className="text-sm font-medium text-slate-300 ml-1">
-                  Your Name
+                <label className="text-sm font-medium text-slate-300 ms-1">
+                  {t(text.name)}
                 </label>
                 <input
                   name="name"
                   type="text"
                   required
-                  placeholder="Hla Hijazi"
-                  className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+                  placeholder={t(text.namePh)}
+                  className={inputClass}
                 />
               </motion.div>
 
@@ -195,15 +237,17 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="flex flex-col gap-2"
               >
-                <label className="text-sm font-medium text-slate-300 ml-1">
-                  Your Email
+                <label className="text-sm font-medium text-slate-300 ms-1">
+                  {t(text.email)}
                 </label>
+                {/* الإيميل دايماً LTR */}
                 <input
                   name="email"
                   type="email"
                   required
+                  dir="ltr"
                   placeholder="hlahijazi22@gmail.com"
-                  className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+                  className={`${inputClass} ${isAr ? "text-end" : ""}`}
                 />
               </motion.div>
             </div>
@@ -213,15 +257,15 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="flex flex-col gap-2"
             >
-              <label className="text-sm font-medium text-slate-300 ml-1">
-                Subject
+              <label className="text-sm font-medium text-slate-300 ms-1">
+                {t(text.subject)}
               </label>
               <input
                 name="subject"
                 type="text"
                 required
-                placeholder="Project Inquiry"
-                className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+                placeholder={t(text.subjectPh)}
+                className={inputClass}
               />
             </motion.div>
 
@@ -230,15 +274,15 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="flex flex-col gap-2"
             >
-              <label className="text-sm font-medium text-slate-300 ml-1">
-                Message
+              <label className="text-sm font-medium text-slate-300 ms-1">
+                {t(text.message)}
               </label>
               <textarea
                 name="message"
                 rows={4}
                 required
-                placeholder="Tell me about your vision..."
-                className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+                placeholder={t(text.messagePh)}
+                className={inputClass}
               />
             </motion.div>
 
@@ -252,14 +296,14 @@ const Contact = () => {
               {state.succeeded ? (
                 <>
                   <CheckCircle2 size={20} />
-                  Message Sent!
+                  {t(text.sent)}
                 </>
               ) : state.submitting ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
-                  <Send size={18} />
-                  Transmit Message
+                  <Send size={18} className="rtl:-scale-x-100" />
+                  {t(text.send)}
                 </>
               )}
             </motion.button>

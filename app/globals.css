@@ -98,3 +98,8 @@ body {
   max-width: 100%;
   overflow-x: clip;
 }
+
+[dir="rtl"] body,
+[dir="rtl"] body *:not(svg):not(path) {
+  font-family: var(--font-arabic), system-ui, sans-serif !important;
+}

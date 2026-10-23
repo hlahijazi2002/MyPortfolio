@@ -2,16 +2,31 @@
 import { motion } from "framer-motion";
 import { skills, techSkills } from "../data";
 import Image from "next/image";
+import { useLang, type L10n } from "../i18n/LanguageProvider";
 
 interface SkillCardProps {
-  title: string;
+  title: L10n;
   icon: React.ElementType;
   index: number;
 }
 
+const text = {
+  // parts = كلمات العنوان بالترتيب، hl = رقم الكلمة اللي بتتلون بالأخضر
+  heading: {
+    en: { parts: ["Technical", "Expertise"], hl: 1 },
+    ar: { parts: ["الخبرات", "التقنية"], hl: 0 },
+  },
+  subtitle: {
+    en: "A specialized collection of technologies and tools I use to bring high-performance web applications to life.",
+    ar: "مجموعة من التقنيات والأدوات التي أعتمد عليها لبناء تطبيقات ويب سريعة وعالية الأداء.",
+  },
+};
+
 const SkillCard = ({ title, icon: Icon, index }: SkillCardProps) => {
+  const { t, dir } = useLang();
   return (
     <motion.div
+      dir={dir}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -23,7 +38,7 @@ const SkillCard = ({ title, icon: Icon, index }: SkillCardProps) => {
         <div className="p-2 rounded-lg w-fit bg-neon-blue/10 text-neon-blue group-hover:scale-110 transition-transform">
           <Icon size={18} />
         </div>
-        <h3 className="text-slate-200 text-sm">{title}</h3>
+        <h3 className="text-slate-200 text-sm whitespace-nowrap">{t(title)}</h3>
       </div>
     </motion.div>
   );
@@ -65,7 +80,10 @@ const TechCard = ({
 );
 
 const Skills = () => {
+  const { t } = useLang();
   const dublicatedSkills = [...skills, ...skills];
+  const heading = t(text.heading);
+
   return (
     <section className="max-w-7xl mx-auto relative py-6">
       <div className="flex flex-col justify-between items-center mb-14 gap-6">
@@ -76,12 +94,18 @@ const Skills = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold text-white mb-6"
           >
-            Technical <span className="text-green-400">Expertise</span>
+            {heading.parts.map((word, i) => (
+              <span key={i}>
+                {i === heading.hl ? (
+                  <span className="text-green-400">{word}</span>
+                ) : (
+                  word
+                )}
+                {i < heading.parts.length - 1 && " "}
+              </span>
+            ))}
           </motion.h2>
-          <p className="text-slate-400 text-md">
-            A specialized collection of technologies and tools I use to bring
-            high-performance web applications to life.
-          </p>
+          <p className="text-slate-400 text-md">{t(text.subtitle)}</p>
         </div>
       </div>
 
@@ -92,11 +116,12 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="relative overflow-hidden">
+        {/* dir="ltr" عشان حركة الـ marquee تضل صح بالعربي كمان */}
+        <div dir="ltr" className="relative overflow-hidden">
           <motion.div
             animate={{ x: ["-50%", "0%"] }}
             transition={{ ease: "linear", duration: 35, repeat: Infinity }}
-            className="gap-3 flex"
+            className="gap-3 flex w-max"
           >
             {dublicatedSkills.map((skill, i) => (
               <SkillCard key={i} {...skill} index={i} />

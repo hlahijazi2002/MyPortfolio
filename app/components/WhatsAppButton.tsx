@@ -1,17 +1,27 @@
 "use client";
 import { motion } from "framer-motion";
+import { useLang } from "../i18n/LanguageProvider";
 
 const PHONE = "970594814452";
-const MESSAGE =
-  "Hi Hla, I saw your portfolio and I'd like to discuss a project / opportunity.";
+
+const text = {
+  message: {
+    en: "Hi Hla, I saw your portfolio and I'd like to discuss a project / opportunity.",
+    ar: "مرحباً هلا، شفت البورتفوليو تبعك وحابب أحكي معك عن مشروع أو فرصة عمل.",
+  },
+  label: { en: "Chat on WhatsApp", ar: "تواصل عبر واتساب" },
+};
 
 const WhatsAppButton = () => {
+  const { t, dir } = useLang();
+
   return (
     <motion.a
-      href={`https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`}
+      dir="ltr"
+      href={`https://wa.me/${PHONE}?text=${encodeURIComponent(t(text.message))}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={t(text.label)}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
       transition={{
@@ -37,8 +47,11 @@ const WhatsAppButton = () => {
         </svg>
       </span>
 
-      <span className="pointer-events-none ml-3 hidden whitespace-nowrap rounded-xl bg-[#ffffff] px-3 py-2 text-xs font-bold text-[#1e293b] opacity-0 shadow-xl transition-opacity duration-300 group-hover:opacity-100 md:block">
-        Chat on WhatsApp
+      <span
+        dir={dir}
+        className="pointer-events-none ml-3 hidden whitespace-nowrap rounded-xl bg-[#ffffff] px-3 py-2 text-xs font-bold text-[#1e293b] opacity-0 shadow-xl transition-opacity duration-300 group-hover:opacity-100 md:block"
+      >
+        {t(text.label)}
       </span>
     </motion.a>
   );
