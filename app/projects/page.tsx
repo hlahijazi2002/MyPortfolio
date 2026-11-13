@@ -1,4 +1,18 @@
+import type { Metadata } from "next";
 import Projects from "@/app/components/Projects";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "Selected web projects by Hla Hijazi, built with Next.js, React, Node.js, and TypeScript.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    title: "Projects | Hla Hijazi",
+    description:
+      "Selected web projects built with Next.js, React, Node.js, and TypeScript.",
+    url: "/projects",
+  },
+};
 
 const ProjectsPage = () => {
   return (
