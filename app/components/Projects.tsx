@@ -107,7 +107,6 @@ export const ProjectCard = ({
 
         <div className="absolute inset-0 flex flex-col justify-end p-8 translate-z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-[#000000]/90 via-[#000000]/60 to-transparent">
           <div className="transform md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
-            {/* الفئة اسم تقنية بالإنجليزي، فبتضل uppercase وبتنعرض LTR */}
             <span
               dir="ltr"
               className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-wider"

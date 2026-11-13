@@ -1,6 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import { Bot, Layers, Languages, Search } from "lucide-react";
+import {
+  Bot,
+  Layers,
+  Languages,
+  Search,
+  Palette,
+  ShieldCheck,
+} from "lucide-react";
 import Image from "next/image";
 import { useLang, type L10n } from "../i18n/LanguageProvider";
 
@@ -41,6 +48,22 @@ const strengths: {
       ar: "فحص تقني وإصلاحات ومحتوى بلغتين يتصدر نتائج البحث.",
     },
   },
+  {
+    icon: Palette,
+    title: { en: "UI/UX Design", ar: "تصميم UI/UX" },
+    text: {
+      en: "Clear, consistent interfaces designed around how people actually use them.",
+      ar: "واجهات واضحة ومتناسقة مصممة حسب طريقة استخدام الناس الفعلية.",
+    },
+  },
+  {
+    icon: ShieldCheck,
+    title: { en: "Secure & Real-Time", ar: "أمان ومراسلة فورية" },
+    text: {
+      en: "Authentication, live messaging, and background jobs that just work.",
+      ar: "تسجيل دخول ومراسلة فورية ومهام خلفية تعمل بثبات.",
+    },
+  },
 ];
 
 const text = {
@@ -55,21 +78,20 @@ const text = {
   name: { en: "Eng. Hla Hijazi", ar: "م. هلا حجازي" },
   photoAlt: { en: "Hla Hijazi", ar: "هلا حجازي" },
   available: { en: "Available for work", ar: "متاحة للعمل" },
+
   p1: {
-    en: "Hi, I'm Hla, a software engineer with 3+ years of experience building scalable web applications, from enterprise dashboards to AI-integrated platforms.",
-    ar: "أهلاً، أنا هلا، مهندسة برمجيات عندي أكثر من 3 سنوات خبرة في بناء تطبيقات ويب قابلة للتوسع، من لوحات التحكم للشركات لحد المنصات المدمج فيها الذكاء الاصطناعي.",
+    en: "I'm a Software Engineer and Full-Stack Web Developer with a background in Computer Systems Engineering. I enjoy building modern web applications and work across both frontend and backend development using React.js, Next.js, JavaScript, TypeScript, Node.js, and Express.js. I also work with MongoDB and PostgreSQL, develop RESTful APIs, manage application state with Redux Toolkit, and integrate third-party services to build complete solutions. Beyond functionality, I care about writing clean, maintainable code and creating applications that are reliable and easy to use. My knowledge of UI/UX design also helps me bring together good engineering and thoughtful user experiences. I've worked on features such as authentication, real-time messaging, media uploads, and background processing using tools like Clerk, Socket.IO, ImageKit, and Inngest.",
+    ar: "أنا مهندسة برمجيات ومطورة ويب Full-Stack، حاصلة على درجة البكالوريوس في هندسة أنظمة الحاسوب. أعمل على تطوير تطبيقات ويب حديثة، وأجمع بين تطوير الواجهات الأمامية والخلفية باستخدام React.js وNext.js وJavaScript وTypeScript وNode.js وExpress.js. كما أتعامل مع قواعد بيانات MongoDB وPostgreSQL، وتطوير RESTful APIs، وإدارة حالة التطبيقات باستخدام Redux Toolkit، ودمج الخدمات الخارجية لبناء حلول متكاملة. أهتم بكتابة كود منظم وقابل للصيانة، وتطوير تطبيقات تجمع بين الأداء الجيد وسهولة الاستخدام. كما تساعدني معرفتي بتصميم UI/UX على تحقيق التوازن بين جودة التطوير وتجربة المستخدم. عملت على تطوير خصائص مثل تسجيل الدخول والمصادقة، والمراسلة الفورية، ورفع الملفات، والمهام الخلفية باستخدام أدوات مثل Clerk وSocket.IO وImageKit وInngest.",
   },
   p2: {
-    en: "I work across the stack with Next.js, React, Node.js, and TypeScript, backed by PostgreSQL, MongoDB, and Prisma. I'm also pursuing an MBA in Artificial Intelligence, so I can take a feature from the interface to the data to the AI layer.",
-    ar: "بشتغل على الـ Stack كامل باستخدام Next.js وReact وNode.js وTypeScript، مع PostgreSQL وMongoDB وPrisma. وكمان بدرس ماجستير MBA في الذكاء الاصطناعي، فبقدر آخد أي ميزة من الواجهة للبيانات لطبقة الذكاء الاصطناعي.",
+    en: "I'm always looking to learn, explore new technologies, and turn ideas into practical solutions. I aim to build meaningful digital products that are well-engineered, easy to use, and genuinely useful.",
+    ar: "أحرص دائماً على تطوير مهاراتي واستكشاف التقنيات الحديثة وتحويل الأفكار إلى حلول عملية. وأسعى إلى بناء منتجات رقمية متقنة، سهلة الاستخدام، وتقدم قيمة حقيقية لمستخدميها.",
   },
-  help: { en: "How I Can Help?", ar: "كيف بقدر أساعدك؟" },
 };
 
 const About = () => {
   const { t, lang, dir } = useLang();
   const isAr = lang === "ar";
-  // اتجاه دخول العناصر بينعكس بالعربي
   const slide = dir === "rtl" ? -1 : 1;
   const heading = t(text.heading);
 
@@ -141,25 +163,12 @@ const About = () => {
 
           <p className="text-slate-300 leading-relaxed">{t(text.p1)}</p>
 
-          <p className="text-slate-400 leading-relaxed">{t(text.p2)}</p>
+          <p className="font-medium leading-relaxed text-green-700 dark:text-green-400">
+            {t(text.p2)}
+          </p>
         </motion.div>
 
         <div className="flex flex-col gap-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {/* uppercase و tracking بيخرّبوا الحروف العربية فبنشيلهم */}
-            <div
-              className={`flex items-center gap-2 font-semibold text-white mb-1 ${
-                isAr ? "text-sm" : "text-[12px] tracking-[0.25em] uppercase"
-              }`}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              {t(text.help)}
-            </div>
-          </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr flex-1">
             {strengths.map(({ icon: Icon, title, text: body }, i) => (
               <motion.div

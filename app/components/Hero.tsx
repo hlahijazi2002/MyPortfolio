@@ -12,10 +12,12 @@ const text = {
     en: "Engineer • Developer • Builder",
     ar: "مهندسة • مطورة • مبتكرة",
   },
+
   paragraph: {
-    en: "Full-Stack Developer working with Next.js and the MERN stack. Clean code, reliable systems, fast interfaces.",
-    ar: "مطورة Full-Stack أعمل بـ Next.js وحزمة MERN. بقدم  كود نظيف، أنظمة موثوقة، وواجهات سريعة.",
+    en: "Full-Stack Software Engineer building modern, scalable web applications with clean code, reliable backends, and responsive, high-performance interfaces.",
+    ar: "مهندسة برمجيات ومطورة Full-Stack، أعمل على بناء تطبيقات ويب حديثة وقابلة للتوسع، بكود منظم وخلفيات موثوقة وواجهات سريعة ومتجاوبة.",
   },
+
   viewWork: { en: "View My Work", ar: "شاهد أعمالي" },
   talk: { en: "Let's Talk", ar: "لنتحدث" },
   mainStack: { en: "Main stack", ar: "التقنيات الأساسية" },
@@ -28,7 +30,6 @@ const text = {
   },
 };
 
-// عنوان الهيرو مقسوم لأجزاء: الجزء الملوّن بالأخضر له className
 const headline = {
   en: [
     { text: "I build scalable " },
@@ -50,12 +51,6 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
-/**
- * تأثير الكتابة:
- * - إنجليزي: حرف حرف
- * - عربي: كلمة كلمة (لأن تقطيع الحرف بيفصل الحروف العربية عن بعضها)
- * بترجع العناصر + وقت انتهاء الأنيميشن عشان باقي العناصر تظهر بعده.
- */
 const typedSequence = (segments: Segment[], isAr: boolean) => {
   const step = isAr ? 0.3 : 0.07;
   let n = 0;
