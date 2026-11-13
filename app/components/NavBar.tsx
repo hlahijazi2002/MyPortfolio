@@ -110,7 +110,7 @@ const NavBar = () => {
                 Array.from(t(link.name)).map((ch, i) => (
                   <span
                     key={i}
-                    className="inline-block transition-colors duration-500 group-hover:text-neon-blue group-hover:[transition-delay:var(--d)]"
+                    className="inline-block transition-colors duration-500 group-hover:text-neon-blue group-hover:delay-(--d)"
                     style={{ "--d": `${i * 70}ms` } as React.CSSProperties}
                   >
                     {ch}

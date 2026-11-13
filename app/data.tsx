@@ -11,8 +11,7 @@ import {
   CheckCircle,
   Zap,
 } from "lucide-react";
-// عدّل المسار حسب مكان الملف عندك
-import type { L10n } from "@/i18n/LanguageProvider";
+import type { L10n } from "@/app/i18n/LanguageProvider";
 
 export interface Project {
   key: number;
@@ -33,7 +32,7 @@ export const projects: Project[] = [
       en: "EduCore University System",
       ar: "نظام EduCore الجامعي",
     },
-    status: "in-progress",
+
     siteLink: "https://edu-core-university-system.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/EduCore-University-System",
   },
@@ -42,7 +41,7 @@ export const projects: Project[] = [
     category: "React",
     image: "/knot.png",
     title: { en: "Knot Platform", ar: "منصة Knot" },
-    status: "in-progress",
+
     siteLink: "https://knot-platform.vercel.app/",
     gitHubLink: "https://github.com/hlahijazi2002/Knot-Platform",
   },
