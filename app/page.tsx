@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import FeaturedProjects from "./components/FeaturedProjects";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import About from "./components/About";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: { en: "/", ar: "/ar", "x-default": "/" },
+  },
+};
 
 export default function Home() {
   return (

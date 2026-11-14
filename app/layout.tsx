@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     "Full-Stack Developer building scalable web platforms with Next.js, React, and Node.js. AI integration, bilingual Arabic/English sites, and technical SEO.",
   keywords: [
     "Hla Hijazi",
+    "هلا حجازي",
     "Full-Stack Developer",
     "Next.js developer",
     "React developer",
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Hla Hijazi", url: SITE_URL }],
   creator: "Hla Hijazi",
-  alternates: { canonical: "/" },
+
   openGraph: {
     type: "website",
     url: SITE_URL,
@@ -70,6 +71,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Hla Hijazi",
+  alternateName: "هلا حجازي",
   jobTitle: "Full-Stack Developer",
   url: SITE_URL,
   sameAs: [
@@ -98,6 +100,13 @@ export default function RootLayout({
       className="scroll-smooth"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(location.pathname==="/ar"||location.pathname.indexOf("/ar/")===0){var d=document.documentElement;d.lang="ar";d.dir="rtl"}`,
+          }}
+        />
+      </head>
       <body
         className={`${jakarta.variable} ${arabicFont.variable} antialiased selection:bg-neon-blue selection:text-white`}
       >

@@ -5,7 +5,10 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Selected web projects by Hla Hijazi, built with Next.js, React, Node.js, and TypeScript.",
-  alternates: { canonical: "/projects" },
+  alternates: {
+    canonical: "/projects",
+    languages: { en: "/projects", ar: "/ar/projects" },
+  },
   openGraph: {
     title: "Projects | Hla Hijazi",
     description:

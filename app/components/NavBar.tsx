@@ -28,19 +28,20 @@ const RESUME_URL =
   "https://docs.google.com/document/d/1c2qDqvsiPYWwoJap_tFQmo7vPB2au0ADKcmCAu_cW28/edit?usp=sharing";
 
 const NavBar = () => {
-  const { lang, dir, t } = useLang();
+  const { lang, dir, t, l } = useLang();
   const isAr = lang === "ar";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("home");
   const pathname = usePathname();
+  const path = pathname.replace(/^\/ar(?=\/|$)/, "") || "/";
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
   const isActive = (href: string) =>
     href === "/projects"
-      ? pathname === "/projects" || (pathname === "/" && active === "projects")
-      : pathname === "/" && active === href.replace("/#", "");
+      ? path === "/projects" || (path === "/" && active === "projects")
+      : path === "/" && active === href.replace("/#", "");
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -71,7 +72,7 @@ const NavBar = () => {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   const isDark = resolvedTheme === "dark";
 
@@ -80,7 +81,7 @@ const NavBar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "py-4 glassmorphism" : "py-6 bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link href="/#home" className="leading-tight">
+        <Link href={l("/#home")} className="leading-tight">
           <p className="text-lg md:text-xl font-bold tracking-tight text-white">
             {t(text.name)}
           </p>
@@ -97,7 +98,7 @@ const NavBar = () => {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={l(link.href)}
               className={`group text-sm font-medium ${
                 isActive(link.href) ? "text-neon-blue" : "text-slate-300"
               }`}
@@ -171,7 +172,7 @@ const NavBar = () => {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={l(link.href)}
                 onClick={() => setMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                   isActive(link.href)
