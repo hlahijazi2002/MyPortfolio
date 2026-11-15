@@ -24,8 +24,7 @@ const text = {
   toggleMenu: { en: "Toggle menu", ar: "فتح القائمة" },
 };
 
-const RESUME_URL =
-  "https://docs.google.com/document/d/1c2qDqvsiPYWwoJap_tFQmo7vPB2au0ADKcmCAu_cW28/edit?usp=sharing";
+const RESUME_URL = "/Hla-Hijazi-CV.pdf";
 
 const NavBar = () => {
   const { lang, dir, t, l } = useLang();
@@ -151,8 +150,7 @@ const NavBar = () => {
           </button>
           <motion.a
             href={RESUME_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            download="Hla-Hijazi-CV.pdf"
             className="bg-neon-blue/10 border border-neon-blue/50 text-neon-blue px-5 py-2 rounded-full text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -185,8 +183,7 @@ const NavBar = () => {
             ))}
             <a
               href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              download="Hla-Hijazi-CV.pdf"
               className="mt-2 px-4 py-3 rounded-xl text-center text-sm font-semibold bg-neon-blue text-[#ffffff]"
             >
               {t(text.resume)}
