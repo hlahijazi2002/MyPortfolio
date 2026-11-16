@@ -155,8 +155,8 @@ const Contact = () => {
               {t(text.availableDesc)}
             </p>
             <a
-              href="/Hla-Hijazi-CV.pdf"
-              download="Hla-Hijazi-CV.pdf"
+              href="/HlaHijazi_CV.pdf"
+              download="Hla_Hijazi_CV.pdf"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-neon-blue/10 border border-neon-blue/50 text-neon-blue text-sm font-semibold hover:bg-neon-blue hover:text-[#ffffff] transition-all"
             >
               <Download size={16} />
